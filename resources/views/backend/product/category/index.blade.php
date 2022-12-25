@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title', 'Product')
+@section('title', 'Product Category')
 
 @section('content')
     <div class="container-fluid page__heading-container">
@@ -8,10 +8,10 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Product</li>
+                        <li class="breadcrumb-item active" aria-current="page">Product Category</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Product</h1>
+                <h1 class="m-0">Product Category</h1>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3>All Product</h3>
+                        <h3> Product Category</h3>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -39,27 +39,16 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Add Counter</h3>
+                        <h3>Add Category</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.product-category.store') }}" method="POST">
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control mb-2" placeholder="Title"
-                                    value="{{ old('title') }}">
-                            </div>
-                            <div class="form-group ">
-                                <select name="category_id" class="form-control">
-                                    <option selected disabled>Select Category</option>
-                                    <option value="">men</option>
-                                </select>
-                            </div>
-                            <div class="form-group ">
-                                <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
+                                <input type="text" name="name" class="form-control mb-2" placeholder="Category Name"
+                                    value="{{ old('name') }}">
                             </div>
 
-                            <div class="form-group">
-                                <input type="file" name="image" class="form-control mb-2">
-                            </div>
+
                             <div class="form-group">
                                 <input type="submit" class="form-control btn btn-md btn-primary" value="Submit">
                             </div>

@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
-{
+class EmployeeController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.sections.employee' );
     }
 
     /**
@@ -23,8 +21,7 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Employee $employee)
-    {
+    public function show( Employee $employee ) {
         //
     }
 
@@ -56,8 +51,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
-    {
+    public function edit( Employee $employee ) {
         //
     }
 
@@ -68,8 +62,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
-    {
+    public function update( Request $request, Employee $employee ) {
         //
     }
 
@@ -79,8 +72,7 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
-    {
+    public function destroy( Employee $employee ) {
         //
     }
 }

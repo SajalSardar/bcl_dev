@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
-class ProductCategoryController extends Controller
-{
+class ProductCategoryController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.product.category.index' );
     }
 
     /**
@@ -23,8 +21,7 @@ class ProductCategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class ProductCategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function show(ProductCategory $productCategory)
-    {
+    public function show( ProductCategory $productCategory ) {
         //
     }
 
@@ -56,8 +51,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProductCategory $productCategory)
-    {
+    public function edit( ProductCategory $productCategory ) {
         //
     }
 
@@ -68,8 +62,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductCategory $productCategory)
-    {
+    public function update( Request $request, ProductCategory $productCategory ) {
         //
     }
 
@@ -79,8 +72,7 @@ class ProductCategoryController extends Controller
      * @param  \App\Models\ProductCategory  $productCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductCategory $productCategory)
-    {
+    public function destroy( ProductCategory $productCategory ) {
         //
     }
 }

@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Sustainability;
 use Illuminate\Http\Request;
 
-class SustainabilityController extends Controller
-{
+class SustainabilityController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.sustainability.index' );
     }
 
     /**
@@ -23,8 +21,7 @@ class SustainabilityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class SustainabilityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class SustainabilityController extends Controller
      * @param  \App\Models\Sustainability  $sustainability
      * @return \Illuminate\Http\Response
      */
-    public function show(Sustainability $sustainability)
-    {
+    public function show( Sustainability $sustainability ) {
         //
     }
 
@@ -56,8 +51,7 @@ class SustainabilityController extends Controller
      * @param  \App\Models\Sustainability  $sustainability
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sustainability $sustainability)
-    {
+    public function edit( Sustainability $sustainability ) {
         //
     }
 
@@ -68,8 +62,7 @@ class SustainabilityController extends Controller
      * @param  \App\Models\Sustainability  $sustainability
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sustainability $sustainability)
-    {
+    public function update( Request $request, Sustainability $sustainability ) {
         //
     }
 
@@ -79,8 +72,7 @@ class SustainabilityController extends Controller
      * @param  \App\Models\Sustainability  $sustainability
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sustainability $sustainability)
-    {
+    public function destroy( Sustainability $sustainability ) {
         //
     }
 }

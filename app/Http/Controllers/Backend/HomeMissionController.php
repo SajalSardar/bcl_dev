@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\HomeMission;
 use Illuminate\Http\Request;
 
-class HomeMissionController extends Controller
-{
+class HomeMissionController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.sections.missionvission' );
     }
 
     /**
@@ -23,8 +21,7 @@ class HomeMissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class HomeMissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class HomeMissionController extends Controller
      * @param  \App\Models\HomeMission  $homeMission
      * @return \Illuminate\Http\Response
      */
-    public function show(HomeMission $homeMission)
-    {
+    public function show( HomeMission $homeMission ) {
         //
     }
 
@@ -56,8 +51,7 @@ class HomeMissionController extends Controller
      * @param  \App\Models\HomeMission  $homeMission
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomeMission $homeMission)
-    {
+    public function edit( HomeMission $homeMission ) {
         //
     }
 
@@ -68,8 +62,7 @@ class HomeMissionController extends Controller
      * @param  \App\Models\HomeMission  $homeMission
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HomeMission $homeMission)
-    {
+    public function update( Request $request, HomeMission $homeMission ) {
         //
     }
 
@@ -79,8 +72,7 @@ class HomeMissionController extends Controller
      * @param  \App\Models\HomeMission  $homeMission
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HomeMission $homeMission)
-    {
+    public function destroy( HomeMission $homeMission ) {
         //
     }
 }

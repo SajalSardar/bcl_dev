@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\HomeAbout;
 use Illuminate\Http\Request;
 
-class HomeAboutController extends Controller
-{
+class HomeAboutController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.sections.homeabout' );
     }
 
     /**
@@ -23,8 +21,7 @@ class HomeAboutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class HomeAboutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class HomeAboutController extends Controller
      * @param  \App\Models\HomeAbout  $homeAbout
      * @return \Illuminate\Http\Response
      */
-    public function show(HomeAbout $homeAbout)
-    {
+    public function show( HomeAbout $homeAbout ) {
         //
     }
 
@@ -56,8 +51,7 @@ class HomeAboutController extends Controller
      * @param  \App\Models\HomeAbout  $homeAbout
      * @return \Illuminate\Http\Response
      */
-    public function edit(HomeAbout $homeAbout)
-    {
+    public function edit( HomeAbout $homeAbout ) {
         //
     }
 
@@ -68,8 +62,7 @@ class HomeAboutController extends Controller
      * @param  \App\Models\HomeAbout  $homeAbout
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HomeAbout $homeAbout)
-    {
+    public function update( Request $request, HomeAbout $homeAbout ) {
         //
     }
 
@@ -79,8 +72,7 @@ class HomeAboutController extends Controller
      * @param  \App\Models\HomeAbout  $homeAbout
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HomeAbout $homeAbout)
-    {
+    public function destroy( HomeAbout $homeAbout ) {
         //
     }
 }

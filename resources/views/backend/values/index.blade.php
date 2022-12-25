@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title', 'Product')
+@section('title', 'Values')
 
 @section('content')
     <div class="container-fluid page__heading-container">
@@ -8,10 +8,10 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Product</li>
+                        <li class="breadcrumb-item active" aria-current="page">Values</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Product</h1>
+                <h1 class="m-0">Values</h1>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3>All Product</h3>
+                        <h3>All Values</h3>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -42,19 +42,10 @@
                         <h3>Add Counter</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('dashboard.product.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.value.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
-                            </div>
-                            <div class="form-group ">
-                                <select name="category_id" class="form-control">
-                                    <option selected disabled>Select Category</option>
-                                    <option value="">men</option>
-                                </select>
-                            </div>
-                            <div class="form-group ">
-                                <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
                             </div>
 
                             <div class="form-group">

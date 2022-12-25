@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
-{
+class ProfileController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.profile.index' );
     }
 
     /**
@@ -23,8 +21,7 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function show(Profile $profile)
-    {
+    public function show( Profile $profile ) {
         //
     }
 
@@ -56,8 +51,7 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function edit(Profile $profile)
-    {
+    public function edit( Profile $profile ) {
         //
     }
 
@@ -68,8 +62,7 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Profile $profile)
-    {
+    public function update( Request $request, Profile $profile ) {
         //
     }
 
@@ -79,8 +72,7 @@ class ProfileController extends Controller
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Profile $profile)
-    {
+    public function destroy( Profile $profile ) {
         //
     }
 }

@@ -171,7 +171,8 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs(['dashboard.home-about.*', 'dashboard.home-mission.*', 'dashboard.employee.*']) ? 'active open' : '' }}">
                                     <a class="sidebar-menu-button" data-toggle="collapse" href="#section_menu">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
@@ -179,18 +180,24 @@
                                         <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                     </a>
                                     <ul class="sidebar-submenu collapse" id="section_menu">
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" href="#">
+                                        <li
+                                            class="sidebar-menu-item {{ request()->routeIs('dashboard.home-about.*') ? 'active' : '' }}">
+                                            <a class="sidebar-menu-button"
+                                                href="{{ route('dashboard.home-about.index') }}">
                                                 <span class="sidebar-menu-text"> About Section</span>
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" href="#">
+                                        <li
+                                            class="sidebar-menu-item {{ request()->routeIs('dashboard.employee.*') ? 'active' : '' }}">
+                                            <a class="sidebar-menu-button"
+                                                href="{{ route('dashboard.employee.index') }}">
                                                 <span class="sidebar-menu-text"> Our Employees</span>
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" href="#">
+                                        <li
+                                            class="sidebar-menu-item {{ request()->routeIs('dashboard.home-mission.*') ? 'active' : '' }}">
+                                            <a class="sidebar-menu-button"
+                                                href="{{ route('dashboard.home-mission.index') }}">
                                                 <span class="sidebar-menu-text">Mission Vission Section</span>
                                             </a>
                                         </li>
@@ -240,7 +247,8 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-menu-item">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs(['dashboard.product.*', 'dashboard.product-category.*']) ? 'active open' : '' }}">
                                     <a class="sidebar-menu-button" data-toggle="collapse" href="#product_menu">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
@@ -248,48 +256,58 @@
                                         <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                     </a>
                                     <ul class="sidebar-submenu collapse" id="product_menu">
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" href="#">
+                                        <li
+                                            class="sidebar-menu-item {{ request()->routeIs('dashboard.product.*') ? 'active' : '' }}">
+                                            <a class="sidebar-menu-button"
+                                                href="{{ route('dashboard.product.index') }}">
                                                 <span class="sidebar-menu-text">Product</span>
                                             </a>
                                         </li>
-                                        <li class="sidebar-menu-item">
-                                            <a class="sidebar-menu-button" href="#">
+                                        <li
+                                            class="sidebar-menu-item {{ request()->routeIs('dashboard.product-category.*') ? 'active' : '' }}">
+                                            <a class="sidebar-menu-button"
+                                                href="{{ route('dashboard.product-category.index') }}">
                                                 <span class="sidebar-menu-text">Category</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.sustainability.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button"
+                                        href="{{ route('dashboard.sustainability.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                         <span class="sidebar-menu-text">Sustainability</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.gallery.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button" href="{{ route('dashboard.gallery.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                         <span class="sidebar-menu-text">Gallery</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.contact.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button" href="{{ route('dashboard.contact.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                         <span class="sidebar-menu-text">Contact</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.profile.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button" href="{{ route('dashboard.profile.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
-                                        <span class="sidebar-menu-text">Profile</span>
+                                        <span class="sidebar-menu-text">Company Profile</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" href="#">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.value.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button" href="{{ route('dashboard.value.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                         <span class="sidebar-menu-text">Values</span>

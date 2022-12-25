@@ -6,16 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Values;
 use Illuminate\Http\Request;
 
-class ValuesController extends Controller
-{
+class ValuesController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        return view( 'backend.values.index' );
     }
 
     /**
@@ -23,8 +21,7 @@ class ValuesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -34,8 +31,7 @@ class ValuesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store( Request $request ) {
         //
     }
 
@@ -45,8 +41,7 @@ class ValuesController extends Controller
      * @param  \App\Models\Values  $values
      * @return \Illuminate\Http\Response
      */
-    public function show(Values $values)
-    {
+    public function show( Values $values ) {
         //
     }
 
@@ -56,8 +51,7 @@ class ValuesController extends Controller
      * @param  \App\Models\Values  $values
      * @return \Illuminate\Http\Response
      */
-    public function edit(Values $values)
-    {
+    public function edit( Values $values ) {
         //
     }
 
@@ -68,8 +62,7 @@ class ValuesController extends Controller
      * @param  \App\Models\Values  $values
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Values $values)
-    {
+    public function update( Request $request, Values $values ) {
         //
     }
 
@@ -79,8 +72,7 @@ class ValuesController extends Controller
      * @param  \App\Models\Values  $values
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Values $values)
-    {
+    public function destroy( Values $values ) {
         //
     }
 }
