@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title', 'Values')
+@section('title', 'Social Link')
 
 @section('content')
     <div class="container-fluid page__heading-container">
@@ -8,21 +8,20 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Values</li>
+                        <li class="breadcrumb-item active" aria-current="page">Social Link</li>
                     </ol>
                 </nav>
-                <h1 class="m-0">Values</h1>
+                <h1 class="m-0">Social Link</h1>
             </div>
         </div>
     </div>
 
     <div class="container-fluid page__container">
-
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3>All Values</h3>
+                        <h3>All Social Link</h3>
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -39,19 +38,26 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Add Counter</h3>
+                        <h3>Social Link</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('dashboard.value.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.banner.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
+                                <label for="" class="form-label">Title: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>
-
                             <div class="form-group">
-                                <label for="" class="form-label">Image: <sup class="text-danger">*</sup></label>
-                                <input type="file" name="image" class="form-control mb-2">
+                                <label for="" class="form-label">Icon Name: <sup class="text-danger">*</sup></label>
+                                <select name="icon" class="form-control mb-2">
+                                    <option value="fa-facebook">Facebook</option>
+                                    <option value="fa-twitter">Twitter</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="form-label">Icon Link: <sup class="text-danger">*</sup></label>
+                                <input type="text" name="link" class="form-control mb-2" placeholder="Icon Link"
+                                    value="{{ old('link') }}">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="form-control btn btn-md btn-primary" value="Submit">
@@ -60,7 +66,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @endsection

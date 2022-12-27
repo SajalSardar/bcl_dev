@@ -43,15 +43,18 @@
                     <div class="card-body">
                         <form action="{{ route('dashboard.banner.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="" class="form-label">Title:</label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
-                                <p style="color: rgba(54, 76, 102, 0.7)">Optional</p>
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Description:</label>
                                 <textarea name="description" class="form-control mb-2" rows="5" placeholder="description">{{ old('description') }}</textarea>
-                                <p style="color: rgba(54, 76, 102, 0.7)">Optional</p>
+
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Banner Image: <sup
+                                        class="text-danger">*</sup></label>
                                 <input type="file" name="slide" class="form-control mb-2">
                                 <p style="color: rgba(54, 76, 102, 0.7)">Select Image Or Video File!</p>
                             </div>

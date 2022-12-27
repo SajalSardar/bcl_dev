@@ -27,16 +27,18 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="address_title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('address_title') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Icon: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="address_icon" class="form-control mb-2" placeholder="Icon"
                                     value="{{ old('address_icon') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-lable">Address:</label>
+                                <label for="" class="form-label">Address: <sup class="text-danger">*</sup></label>
                                 <textarea name="address" class="form-control mb-2" rows="4">{{ old('address') }}</textarea>
                             </div>
                         </div>
@@ -49,16 +51,18 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="email_title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('email_title') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Icon: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="email_icon" class="form-control mb-2" placeholder="Icon"
                                     value="{{ old('email_icon') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-lable">Email:</label>
+                                <label for="" class="form-label">Email: <sup class="text-danger">*</sup></label>
                                 <textarea name="email" class="form-control mb-2" rows="4">{{ old('email') }}</textarea>
                             </div>
 
@@ -73,16 +77,18 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="call_title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('call_title') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Icon: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="call_icon" class="form-control mb-2" placeholder="Icon"
                                     value="{{ old('call_icon') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-lable">Number:</label>
+                                <label for="" class="form-label">Phone: <sup class="text-danger">*</sup></label>
                                 <textarea name="number" class="form-control mb-2" rows="4">{{ old('number') }}</textarea>
                             </div>
                         </div>
@@ -95,6 +101,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Google Map Location: </label>
                                 <input type="text" name="map_location" class="form-control mb-2"
                                     placeholder="Google Map Location" value="{{ old('map_location') }}">
                             </div>

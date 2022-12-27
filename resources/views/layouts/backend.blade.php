@@ -219,7 +219,7 @@
                                         href="{{ route('dashboard.mission-vission.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
-                                        <span class="sidebar-menu-text">Mission vission</span>
+                                        <span class="sidebar-menu-text">Mission Vission Block</span>
                                     </a>
                                 </li>
                                 <li
@@ -313,18 +313,66 @@
                                         <span class="sidebar-menu-text">Values</span>
                                     </a>
                                 </li>
-
-                                <li class="sidebar-menu-item">
-                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#apps_menu">
+                                <li
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.social-link.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button" href="{{ route('dashboard.social-link.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
-                                        <span class="sidebar-menu-text">Apps</span>
+                                        <span class="sidebar-menu-text">Social Link</span>
+                                    </a>
+                                </li>
+
+                                <li class="sidebar-menu-item">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#settings_menu">
+                                        <i
+                                            class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
+                                        <span class="sidebar-menu-text">Settings</span>
                                         <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                     </a>
-                                    <ul class="sidebar-submenu collapse" id="apps_menu">
+                                    <ul class="sidebar-submenu collapse" id="settings_menu">
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" href="#">
+                                                <span class="sidebar-menu-text">Home Section Setting</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" href="#">
+                                                <span class="sidebar-menu-text">Header</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" href="#">
+                                                <span class="sidebar-menu-text">Footer</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" href="#">
+                                                <span class="sidebar-menu-text">Page Headding</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" href="#">
+                                                <span class="sidebar-menu-text">Section Headding</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="sidebar-menu-item">
+                                    <a class="sidebar-menu-button" data-toggle="collapse" href="#user_menu">
+                                        <i
+                                            class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
+                                        <span class="sidebar-menu-text">Users</span>
+                                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                    </a>
+                                    <ul class="sidebar-submenu collapse" id="user_menu">
                                         <li class="sidebar-menu-item">
                                             <a class="sidebar-menu-button" href="app-activities.html">
-                                                <span class="sidebar-menu-text">Activities</span>
+                                                <span class="sidebar-menu-text">Add New User</span>
+                                            </a>
+                                        </li>
+                                        <li class="sidebar-menu-item">
+                                            <a class="sidebar-menu-button" href="app-activities.html">
+                                                <span class="sidebar-menu-text">All Users</span>
                                             </a>
                                         </li>
                                     </ul>

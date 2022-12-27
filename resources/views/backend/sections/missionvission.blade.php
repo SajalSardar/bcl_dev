@@ -27,16 +27,19 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title_one" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title_one') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Icon: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="icon_one" class="form-control mb-2" placeholder="Icon"
                                     value="{{ old('icon') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-lable">Description:</label>
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description_one" class="form-control mb-2" rows="4">{{ old('description_one') }}</textarea>
                             </div>
                         </div>
@@ -49,16 +52,19 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title_two" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title_two') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Icon: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="icon_two" class="form-control mb-2" placeholder="Icon"
                                     value="{{ old('icon_two') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-lable">Description:</label>
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description_two" class="form-control mb-2" rows="4">{{ old('description_two') }}</textarea>
                             </div>
 
@@ -73,16 +79,19 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title_three" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title_three') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Icon: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="icon_three" class="form-control mb-2" placeholder="Icon"
                                     value="{{ old('icon_three') }}">
                             </div>
 
                             <div class="form-group">
-                                <label class="form-lable">Description:</label>
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description_three" class="form-control mb-2" rows="4">{{ old('description_three') }}</textarea>
                             </div>
                         </div>
@@ -95,6 +104,7 @@
                         </div>
                         <div class="card-body">
                             <div class="form-group">
+                                <label for="" class="form-label">Image: </label>
                                 <input type="file" name="image" class="form-control mb-2">
                             </div>
                         </div>

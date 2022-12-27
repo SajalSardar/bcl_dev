@@ -28,14 +28,18 @@
                         <form action="{{ route('dashboard.sustainability.store') }}" method="POST"
                             enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>
                             <div class="form-group ">
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
                             </div>
 
                             <div class="form-group">
+                                <label for="" class="form-label">Image: <sup class="text-danger">*</sup></label>
                                 <input type="file" name="image" class="form-control mb-2">
                             </div>
                             <div class="form-group">

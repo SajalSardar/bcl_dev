@@ -27,20 +27,24 @@
                     <div class="card-body">
                         <form action="{{ route('dashboard.company.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>
                             <div class="form-group ">
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
                             </div>
                             <div class="row">
                                 <div class="form-group col-sm-6">
-                                    <label class="form-lable">Icon Image:</label>
+                                    <label for="" class="form-label">Block Icon: <sup
+                                            class="text-danger">*</sup></label>
                                     <input type="file" name="icon" class="form-control mb-2">
                                 </div>
 
                                 <div class="form-group col-sm-6">
-                                    <label class="form-lable">Banner Image:</label>
+                                    <label for="" class="form-label">Banner Image:</label>
                                     <input type="file" name="banner_image" class="form-control mb-2">
                                 </div>
                             </div>

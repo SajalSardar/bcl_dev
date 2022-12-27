@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController as BackendProfileController;
 use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\SocialLinkController;
 use App\Http\Controllers\Backend\SustainabilityController;
 use App\Http\Controllers\Backend\ValuesController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -48,6 +49,7 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
     Route::resource( '/home-about', HomeAboutController::class );
     Route::resource( '/home-mission', HomeMissionController::class );
     Route::resource( '/employee', EmployeeController::class );
+    Route::resource( '/social-link', SocialLinkController::class );
 } );
 
 Route::middleware( 'auth' )->group( function () {

@@ -44,14 +44,19 @@
                     <div class="card-body">
                         <form action="{{ route('dashboard.counter.store') }}" method="POST">
                             <div class="form-group">
+                                <label for="" class="form-label">Title: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>
 
                             <div class="form-group">
+                                <label for="" class="form-label">Counter Number: <sup
+                                        class="text-danger">*</sup></label>
                                 <input type="number" name="number" placeholder="Number" class="form-control mb-2">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Counter Icon: <sup
+                                        class="text-danger">*</sup></label>
                                 <input type="text" name="icon" placeholder="Icon" class="form-control mb-2">
                             </div>
                             <div class="form-group">

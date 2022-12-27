@@ -44,6 +44,7 @@
                     <div class="card-body">
                         <form action="{{ route('dashboard.product-category.store') }}" method="POST">
                             <div class="form-group">
+                                <label for="" class="form-label">Name: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="name" class="form-control mb-2" placeholder="Category Name"
                                     value="{{ old('name') }}">
                             </div>

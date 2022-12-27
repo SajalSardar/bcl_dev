@@ -27,18 +27,23 @@
                     <div class="card-body">
                         <form action="{{ route('dashboard.company.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>
                             <div class="form-group ">
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label class="form-lable">Year:</label>
+                                <label for="" class="form-label">Year: <sup class="text-danger">*</sup></label>
                                 <input type="number" name="year" class="form-control mb-2" placeholder="Year"
                                     value="{{ old('year') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Year Bottom Title: <sup
+                                        class="text-danger">*</sup></label>
                                 <input type="text" name="bottom_title" class="form-control mb-2"
                                     placeholder="Year Bottom Title" value="{{ old('bottom_title') }}">
                             </div>

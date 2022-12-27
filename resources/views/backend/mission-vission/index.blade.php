@@ -27,14 +27,18 @@
                         <form action="{{ route('dashboard.mission-vission.store') }}" method="POST"
                             enctype="multipart/form-data">
                             <div class="form-group">
+                                <label for="" class="form-label">Title: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Description: <sup
+                                        class="text-danger">*</sup></label>
                                 <textarea name="description" class="form-control mb-2" rows="5" placeholder="description">{{ old('description') }}</textarea>
 
                             </div>
                             <div class="form-group">
+                                <label for="" class="form-label">Image: <sup class="text-danger">*</sup></label>
                                 <input type="file" name="image" class="form-control mb-2">
                                 <p style="color: rgba(54, 76, 102, 0.7)"></p>
                             </div>
