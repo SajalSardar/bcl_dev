@@ -25,21 +25,28 @@
                         <h3>Add About</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('dashboard.employee.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.employee.update', $employee->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
-                                    value="{{ old('title') }}">
+                                    value="{{ $employee->title }}">
                             </div>
                             <div class="form-group ">
                                 <label for="" class="form-label">Description: <sup
                                         class="text-danger">*</sup></label>
-                                <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
+                                <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ $employee->description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label for="" class="form-label">Image: <sup class="text-danger">*</sup></label>
                                 <label class="form-lable">Image:</label>
-                                <input type="file" name="image" class="form-control mb-2">
+                                <input type="file" id="file_input" name="image" class="form-control mb-2">
+
+                                <div class="mt-3">
+                                    <img src="{{ asset('storage/employee/' . $employee->image) }}" width="100"
+                                        alt="" id="show_img">
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -52,4 +59,17 @@
         </div>
 
     </div>
+@endsection
+
+@section('script')
+    <script>
+        //image change
+        let imgf = document.getElementById("file_input");
+        let output = document.getElementById("show_img");
+
+        imgf.addEventListener("change", function(event) {
+            let tmppath = URL.createObjectURL(event.target.files[0]);
+            output.src = tmppath;
+        });
+    </script>
 @endsection

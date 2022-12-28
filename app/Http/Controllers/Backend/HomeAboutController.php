@@ -13,46 +13,8 @@ class HomeAboutController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.sections.homeabout' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store( Request $request ) {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\HomeAbout  $homeAbout
-     * @return \Illuminate\Http\Response
-     */
-    public function show( HomeAbout $homeAbout ) {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\HomeAbout  $homeAbout
-     * @return \Illuminate\Http\Response
-     */
-    public function edit( HomeAbout $homeAbout ) {
-        //
+        $about = HomeAbout::firstOrFail();
+        return view( 'backend.sections.homeabout', compact( 'about' ) );
     }
 
     /**
@@ -63,16 +25,25 @@ class HomeAboutController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, HomeAbout $homeAbout ) {
-        //
+        $request->validate( [
+            "title"        => 'required',
+            "description"  => 'required|max:300',
+            "year"         => 'required|integer',
+            "bottom_title" => 'required',
+        ] );
+
+        $update = $homeAbout->update( [
+            "title"             => $request->title,
+            "description"       => $request->description,
+            "year"              => $request->year,
+            "year_bottom_title" => $request->bottom_title,
+        ] );
+
+        if ( $update ) {
+            return back()->with( 'success', 'Home About Update Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Home About Update Fail!' );
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\HomeAbout  $homeAbout
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy( HomeAbout $homeAbout ) {
-        //
-    }
 }

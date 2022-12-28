@@ -31,7 +31,30 @@
                                 <th>Image</th>
                                 <th>Action</th>
                             </tr>
+                            @foreach ($sliders as $slider)
+                                <tr>
+                                    <td>{{ $slider->id }}</td>
+                                    <td>{{ Str::limit($slider->title, 20, '...') }}</td>
+                                    <td>
+                                        @if ($slider->slide_type == 'video')
+                                            <video autoplay="" loop="" height="80">
+                                                <source src="{{ asset('storage/slide/' . $slider->slide) }}"
+                                                    type="video/mp4">
+                                            </video>
+                                        @else
+                                            <img src="{{ asset('storage/slide/' . $slider->slide) }}"
+                                                alt="{{ $slider->title }}" height="80">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="#">Edit</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
+                    </div>
+                    <div class="card-footer">
+                        {{ $sliders->links() }}
                     </div>
                 </div>
             </div>
@@ -41,9 +64,19 @@
                         <h3>Select Slide</h3>
                     </div>
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <form action="{{ route('dashboard.banner.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group">
-                                <label for="" class="form-label">Title:</label>
+                                <label for="" class="form-label">Title:<sup class="text-danger">*</sup></label>
                                 <input type="text" name="title" class="form-control mb-2" placeholder="Title"
                                     value="{{ old('title') }}">
                             </div>

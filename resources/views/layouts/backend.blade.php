@@ -15,6 +15,7 @@
     <link type="text/css" href="{{ asset('backend/css/vendor-material-icons.css') }}" rel="stylesheet">
 
     <link type="text/css" href="{{ asset('backend/css/vendor-fontawesome-free.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ asset('backend/css/sweetalert2.min.css') }}" rel="stylesheet">
 
     @yield('style')
 
@@ -478,7 +479,9 @@
 
     <!-- Global Settings -->
     <script src="{{ asset('backend/js/settings.js') }}"></script>
+    <script src="{{ asset('backend/js/sweetalert2.min.js') }}"></script>
 
+    @include('flashmessage')
 
     @yield('script')
 

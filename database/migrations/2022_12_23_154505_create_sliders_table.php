@@ -13,9 +13,10 @@ return new class extends Migration {
     public function up() {
         Schema::create( 'sliders', function ( Blueprint $table ) {
             $table->id();
-            $table->string( 'title' )->nullable();
+            $table->string( 'title' );
             $table->text( 'description' )->nullable();
             $table->string( 'slide' );
+            $table->string( 'slide_type' );
             $table->integer( 'status' )->default( 1 );
             $table->timestamps();
         } );
