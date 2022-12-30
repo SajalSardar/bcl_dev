@@ -13,16 +13,8 @@ class CounterController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.counter.index' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
+        $counters = Counter::orderBy( 'id', 'desc' )->paginate( 20 );
+        return view( 'backend.counter.index', compact( 'counters' ) );
     }
 
     /**
@@ -32,17 +24,23 @@ class CounterController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ) {
-        //
-    }
+        $request->validate( [
+            "title"  => 'required|unique:counters,title',
+            "number" => 'required|integer',
+            "icon"   => 'required',
+        ] );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Counter  $counter
-     * @return \Illuminate\Http\Response
-     */
-    public function show( Counter $counter ) {
-        //
+        $success = Counter::create( [
+            "title"  => $request->title,
+            "number" => $request->number,
+            "icon"   => $request->icon,
+        ] );
+        if ( $success ) {
+            return back()->with( 'success', 'Counter Insert Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Counter Insert Failed!' );
+        }
+
     }
 
     /**
@@ -52,7 +50,7 @@ class CounterController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( Counter $counter ) {
-        //
+        return view( 'backend.counter.edit', compact( 'counter' ) );
     }
 
     /**
@@ -63,7 +61,22 @@ class CounterController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, Counter $counter ) {
-        //
+        $request->validate( [
+            "title"  => 'required|unique:counters,title,' . $counter->id,
+            "number" => 'required|integer',
+            "icon"   => 'required',
+        ] );
+
+        $success = $counter->update( [
+            "title"  => $request->title,
+            "number" => $request->number,
+            "icon"   => $request->icon,
+        ] );
+        if ( $success ) {
+            return redirect()->route( 'dashboard.counter.index' )->with( 'success', 'Counter Insert Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.counter.index' )->with( 'success', 'Counter Insert Failed!' );
+        }
     }
 
     /**
@@ -73,6 +86,27 @@ class CounterController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Counter $counter ) {
-        //
+        $counter->delete();
+        return redirect()->route( 'dashboard.counter.index' )->with( 'success', 'Counter Delete Successfully Done!' );
+    }
+
+    /**
+     * counter Status Update.
+     *
+     * @param  \App\Models\Slider  $slider
+     * @return \Illuminate\Http\Response
+     */
+    public function counterStatusUpdate( Counter $counter ) {
+
+        if ( $counter->status == 1 ) {
+            $counter->update( [
+                'status' => 2,
+            ] );
+        } else {
+            $counter->update( [
+                'status' => 1,
+            ] );
+        }
+        return redirect()->route( 'dashboard.counter.index' )->with( 'success', ' Status Update Successfully Done!' );
     }
 }

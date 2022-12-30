@@ -207,8 +207,8 @@
 
 
                                 <li
-                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.banner.*') ? 'active' : '' }}">
-                                    <a class="sidebar-menu-button" href="{{ route('dashboard.banner.index') }}">
+                                    class="sidebar-menu-item {{ request()->routeIs('dashboard.slider.*') ? 'active' : '' }}">
+                                    <a class="sidebar-menu-button" href="{{ route('dashboard.slider.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
                                         <span class="sidebar-menu-text">Slider</span>
@@ -220,7 +220,7 @@
                                         href="{{ route('dashboard.mission-vission.index') }}">
                                         <i
                                             class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
-                                        <span class="sidebar-menu-text">Mission Vission Block</span>
+                                        <span class="sidebar-menu-text">About Page Block</span>
                                     </a>
                                 </li>
                                 <li

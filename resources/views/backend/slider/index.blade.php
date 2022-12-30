@@ -29,6 +29,7 @@
                                 <th>Id</th>
                                 <th>Title</th>
                                 <th>Image</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                             @foreach ($sliders as $slider)
@@ -37,9 +38,10 @@
                                     <td>{{ Str::limit($slider->title, 20, '...') }}</td>
                                     <td>
                                         @if ($slider->slide_type == 'video')
-                                            <video autoplay="" loop="" height="80">
+                                            <video height="80" controls>
                                                 <source src="{{ asset('storage/slide/' . $slider->slide) }}"
                                                     type="video/mp4">
+                                                Your browser does not support the video tag.
                                             </video>
                                         @else
                                             <img src="{{ asset('storage/slide/' . $slider->slide) }}"
@@ -47,7 +49,21 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="#">Edit</a>
+                                        <span
+                                            class="badge {{ $slider->status == 1 ? 'badge-success' : 'badge-warning' }}">{{ $slider->status == 1 ? 'Active' : 'Deactive' }}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('dashboard.slider.edit', $slider->id) }}"
+                                            class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('dashboard.slider.destroy', $slider->id) }}" method="POST"
+                                            class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-sm btn-danger delete_btn">Delete</button>
+
+                                        </form>
+                                        <a
+                                            href="{{ route('dashboard.slider.status.update', $slider->id) }}"class="btn btn-sm {{ $slider->status == 1 ? 'bg-warning' : 'bg-info' }}">{{ $slider->status == 1 ? 'Deactive' : 'Active' }}</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -64,35 +80,39 @@
                         <h3>Select Slide</h3>
                     </div>
                     <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form action="{{ route('dashboard.banner.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.slider.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="" class="form-label">Title:<sup class="text-danger">*</sup></label>
-                                <input type="text" name="title" class="form-control mb-2" placeholder="Title"
+                                <input type="text" name="title"
+                                    class="form-control mb-2 @error('title') is-invalid @enderror" placeholder="Title"
                                     value="{{ old('title') }}">
+                                @error('title')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label">Description:</label>
-                                <textarea name="description" class="form-control mb-2" rows="5" placeholder="description">{{ old('description') }}</textarea>
+                                <textarea name="description" class="form-control mb-2 @error('description') is-invalid @enderror" rows="5"
+                                    placeholder="description">{{ old('description') }}</textarea>
+                                @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+
 
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label">Banner Image: <sup
                                         class="text-danger">*</sup></label>
-                                <input type="file" name="slide" class="form-control mb-2">
-                                <p style="color: rgba(54, 76, 102, 0.7)">Select Image Or Video File!</p>
+                                <input type="file" name="slide"
+                                    class="form-control mb-2 @error('slide') is-invalid @enderror">
+                                <p style="color: rgba(54, 76, 102, 0.7)">Select Image 1920x800 Or Video File!</p>
+                                @error('slide')
+                                    <p class="text-danger">{{ $message }} </p>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <input type="submit" class="form-control btn btn-md btn-primary" value="Upload">
+                                <input type="submit" class="form-control btn btn-md btn-primary" value="Submit">
                             </div>
                         </form>
                     </div>
@@ -100,4 +120,29 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+
+    <script>
+        $(function($) {
+            $('.delete_btn').on('click', function() {
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).parent('form').submit();
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection

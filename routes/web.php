@@ -33,9 +33,12 @@ Route::controller( FrontendController::class )->name( 'frontend.' )->group( func
 
 Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified'] )->group( function () {
     Route::get( '/', [BackendController::class, 'index'] )->name( 'index' );
-    Route::resource( '/banner', SliderController::class );
-    Route::resource( '/mission-vission', MissionVissionController::class );
+    Route::resource( '/slider', SliderController::class )->except( ['create', 'show'] );
+    Route::get( '/slider/status/update/{slider}', [SliderController::class, 'sliderStatusUpdate'] )->name( 'slider.status.update' );
+    Route::resource( '/mission-vission', MissionVissionController::class )->except( ['create', 'show'] );
+    Route::get( '/mission-vission/status/update/{missionVission}', [MissionVissionController::class, 'mvStatusUpdate'] )->name( 'mission.vission.status' );
     Route::resource( '/counter', CounterController::class );
+    Route::get( '/counter/status/update/{counter}', [CounterController::class, 'counterStatusUpdate'] )->name( 'counter.status' );
     Route::resource( '/company', CompanyController::class );
     Route::resource( '/about', AboutController::class );
     Route::resource( '/product-category', ProductCategoryController::class );
@@ -46,9 +49,9 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
     Route::resource( '/contact', ContactController::class );
     Route::resource( '/profile', BackendProfileController::class );
     Route::resource( '/value', ValuesController::class );
-    Route::resource( '/home-about', HomeAboutController::class );
-    Route::resource( '/home-mission', HomeMissionController::class );
-    Route::resource( '/employee', EmployeeController::class );
+    Route::resource( '/home-about', HomeAboutController::class )->only( ['index', 'update'] );
+    Route::resource( '/home-mission', HomeMissionController::class )->only( ['index', 'update'] );
+    Route::resource( '/employee', EmployeeController::class )->only( ['index', 'update'] );
     Route::resource( '/social-link', SocialLinkController::class );
 } );
 
