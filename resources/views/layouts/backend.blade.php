@@ -357,7 +357,8 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="sidebar-menu-item">
+                                    <li
+                                        class="sidebar-menu-item {{ request()->routeIs('dashboard.user.*') ? 'active open' : '' }}">
                                         <a class="sidebar-menu-button" data-toggle="collapse" href="#user_menu">
                                             <i
                                                 class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
@@ -365,13 +366,17 @@
                                             <span class="ml-auto sidebar-menu-toggle-icon"></span>
                                         </a>
                                         <ul class="sidebar-submenu collapse" id="user_menu">
-                                            <li class="sidebar-menu-item">
-                                                <a class="sidebar-menu-button" href="app-activities.html">
+                                            <li
+                                                class="sidebar-menu-item {{ request()->routeIs('dashboard.user.create') ? 'active' : '' }}">
+                                                <a class="sidebar-menu-button"
+                                                    href="{{ route('dashboard.user.create') }}">
                                                     <span class="sidebar-menu-text">Add New User</span>
                                                 </a>
                                             </li>
-                                            <li class="sidebar-menu-item">
-                                                <a class="sidebar-menu-button" href="app-activities.html">
+                                            <li
+                                                class="sidebar-menu-item {{ request()->routeIs('dashboard.user.index') ? 'active' : '' }}">
+                                                <a class="sidebar-menu-button"
+                                                    href="{{ route('dashboard.user.index') }}">
                                                     <span class="sidebar-menu-text">All Users</span>
                                                 </a>
                                             </li>

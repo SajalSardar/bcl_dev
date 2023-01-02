@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\SustainabilityController;
 use App\Http\Controllers\Backend\ValuesController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller( FrontendController::class )->name( 'frontend.' )->group( function () {
@@ -61,6 +62,10 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
 
     Route::get( '/section-settings', [SectionSettingController::class, 'sectionSettings'] )->name( 'setting.section' );
     Route::post( '/section-settings', [SectionSettingController::class, 'sectionSettingsUpdate'] )->name( 'setting.section.update' );
+
+    Route::get( '/users', [UserController::class, 'index'] )->name( 'user.index' );
+    Route::get( '/user/create', [UserController::class, 'create'] )->name( 'user.create' );
+    Route::post( '/user/create', [UserController::class, 'store'] )->name( 'user.store' );
 } );
 
 Route::middleware( 'auth' )->group( function () {
