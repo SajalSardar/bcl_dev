@@ -13,9 +13,9 @@ return new class extends Migration {
     public function up() {
         Schema::create( 'profiles', function ( Blueprint $table ) {
             $table->id();
-            $table->string( 'title' );
-            $table->longText( 'description' );
-            $table->string( 'image' );
+            $table->string( 'title' )->default( 'Bulid a Bright Future Fore Bangladesh' );
+            $table->longText( 'description' )->nullable();
+            $table->string( 'image' )->nullable();
             $table->string( 'profile' )->nullable();
             $table->integer( 'status' )->default( 1 );
             $table->timestamps();

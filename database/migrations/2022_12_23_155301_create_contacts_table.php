@@ -13,15 +13,15 @@ return new class extends Migration {
     public function up() {
         Schema::create( 'contacts', function ( Blueprint $table ) {
             $table->id();
-            $table->string( 'address_title' );
-            $table->string( 'address_icon' );
-            $table->text( 'address' );
-            $table->string( 'email_title' );
-            $table->string( 'email_icon' );
-            $table->text( 'email' );
-            $table->string( 'call_title' );
-            $table->string( 'call_icon' );
-            $table->string( 'number' );
+            $table->string( 'address_title' )->default( 'Our Address' );
+            $table->string( 'address_icon' )->default( 'fas fa-map-location-dot' );
+            $table->text( 'address' )->nullable();
+            $table->string( 'email_title' )->default( 'Email' );
+            $table->string( 'email_icon' )->default( 'fas fa-envelope' );
+            $table->text( 'email' )->nullable();
+            $table->string( 'call_title' )->default( 'Phone' );
+            $table->string( 'call_icon' )->default( 'fas fa-phone' );
+            $table->string( 'number' )->nullable();
             $table->text( 'map' )->nullable();
             $table->integer( 'status' )->default( 1 );
             $table->timestamps();

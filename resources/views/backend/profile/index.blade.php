@@ -25,28 +25,52 @@
                         <h3>Company Profile</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('dashboard.profile.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.profile.update', $profile->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="" class="form-label">Titel: <sup class="text-danger">*</sup></label>
-                                <input type="text" name="title" class="form-control mb-2" placeholder="Title"
-                                    value="{{ old('title') }}">
+                                <input type="text" name="title"
+                                    class="form-control mb-2 @error('title') is-invalid @enderror" placeholder="Title"
+                                    value="{{ $profile->title }}">
+                                @error('title')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group ">
                                 <label for="" class="form-label">Description: <sup
                                         class="text-danger">*</sup></label>
-                                <textarea name="description" class="form-control mb-2" rows="8" placeholder="description">{{ old('description') }}</textarea>
+                                <textarea name="description" class="form-control mb-2 @error('description') is-invalid @enderror" rows="8"
+                                    placeholder="description">{{ $profile->description }}</textarea>
+                                @error('description')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label">Image: <sup class="text-danger">*</sup></label>
-                                <input type="file" name="image" class="form-control mb-2">
+                                <input type="file" name="image" id="file_input"
+                                    class="form-control mb-2 @error('image') is-invalid @enderror">
+                                <p style="color: rgba(54, 76, 102, 0.7)">Selected Image Size 500x500!</p>
+                                @error('image')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
+                                <div class="mt-2">
+                                    <img src="{{ asset('storage/uploads/' . $profile->image) }}" id="show_img"
+                                        alt="" width="100">
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="form-lable">Upload Profile:</label>
-                                <input type="file" name="profile" class="form-control mb-2">
+                                <input type="file" name="profile"
+                                    class="form-control mb-2 @error('profile') is-invalid @enderror">
+                                @error('profile')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="form-group">
-                                <input type="submit" class=" btn btn-md btn-primary" value="Submit">
+                                <input type="submit" class=" btn btn-md btn-primary" value="Update">
                             </div>
                         </form>
                     </div>
@@ -55,4 +79,20 @@
         </div>
 
     </div>
+@endsection
+
+
+@section('script')
+
+    <script>
+        //image change
+        let imgf = document.getElementById("file_input");
+        let output = document.getElementById("show_img");
+
+        imgf.addEventListener("change", function(event) {
+            let tmppath = URL.createObjectURL(event.target.files[0]);
+            output.src = tmppath;
+        });
+    </script>
+
 @endsection

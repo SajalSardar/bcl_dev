@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller {
     /**
@@ -13,16 +17,9 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.product.index' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
+        $categories = ProductCategory::all();
+        $products   = Product::orderBy( 'id', 'desc' )->paginate( 30 );
+        return view( 'backend.product.index', compact( 'categories', 'products' ) );
     }
 
     /**
@@ -32,17 +29,37 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ) {
-        //
-    }
+        $file = $request->file( 'image' );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show( Product $product ) {
-        //
+        $request->validate( [
+            "title"       => 'required|unique:products,title',
+            "description" => 'nullable',
+            "category_id" => 'required',
+            "image"       => 'required|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $image_name = Str::uuid() . '.' . $file->extension();
+            $upload     = Image::make( $file )->crop( 800, 1000 )->save( public_path( 'storage/product/' . $image_name ) );
+        }
+
+        if ( $upload ) {
+            $success = Product::create( [
+                "title"               => $request->title,
+                "slug"                => Str::slug( $request->title ),
+                "product_category_id" => $request->category_id,
+                "description"         => $request->description,
+                "image"               => $image_name,
+            ] );
+            if ( $success ) {
+
+                return back()->with( 'success', 'Product Insert Successfully Done!' );
+            } else {
+                return back()->with( 'success', 'Product Insert Failed!' );
+            }
+        } else {
+            return back()->with( 'error', 'File not Uploading!' );
+        }
     }
 
     /**
@@ -52,7 +69,8 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( Product $product ) {
-        //
+        $categories = ProductCategory::all();
+        return view( 'backend.product.edit', compact( 'product', 'categories' ) );
     }
 
     /**
@@ -63,7 +81,38 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, Product $product ) {
-        //
+        $file = $request->file( 'image' );
+
+        $request->validate( [
+            "title"       => 'required|unique:products,title,' . $product->id,
+            "description" => 'nullable',
+            "category_id" => 'required',
+            "image"       => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            if ( file_exists( public_path( 'storage/product/' . $product->image ) ) ) {
+                Storage::delete( 'product/' . $product->image );
+            }
+            $image_name = Str::uuid() . '.' . $file->extension();
+            $upload     = Image::make( $file )->crop( 500, 500 )->save( public_path( 'storage/product/' . $image_name ) );
+        } else {
+            $image_name = $product->image;
+        }
+
+        $success = $product->update( [
+            "title"       => $request->title,
+            'slug'        => Str::slug( $request->title ),
+            "description" => $request->description,
+            "image"       => $image_name,
+        ] );
+        if ( $success ) {
+
+            return redirect()->route( 'dashboard.product.index' )->with( 'success', 'Product Update Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.product.index' )->with( 'success', 'Product Update Failed!' );
+        }
+
     }
 
     /**
@@ -73,6 +122,35 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Product $product ) {
-        //
+        if ( file_exists( public_path( 'storage/product/' . $product->image ) ) ) {
+            Storage::delete( 'product/' . $product->image );
+        }
+        $success = $product->delete();
+        if ( $success ) {
+
+            return redirect()->route( 'dashboard.product.index' )->with( 'success', 'Product Delete Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.product.index' )->with( 'success', 'Product Delete Failed!' );
+        }
+    }
+
+    /**
+     * product Status Update.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function productStatusUpdate( Product $product ) {
+
+        if ( $product->status == 1 ) {
+            $product->update( [
+                'status' => 2,
+            ] );
+        } else {
+            $product->update( [
+                'status' => 1,
+            ] );
+        }
+        return redirect()->route( 'dashboard.product.index' )->with( 'success', 'Status Update Successfully Done!' );
     }
 }

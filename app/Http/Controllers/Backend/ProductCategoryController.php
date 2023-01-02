@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductCategoryController extends Controller {
     /**
@@ -13,16 +14,8 @@ class ProductCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.product.category.index' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
+        $categories = ProductCategory::orderBy( 'id', 'desc' )->paginate( 10 );
+        return view( 'backend.product.category.index', compact( 'categories' ) );
     }
 
     /**
@@ -32,17 +25,20 @@ class ProductCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ) {
-        //
-    }
+        $request->validate( [
+            'name' => 'required',
+        ] );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ProductCategory  $productCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show( ProductCategory $productCategory ) {
-        //
+        $success = ProductCategory::create( [
+            'name' => $request->name,
+            'slug' => Str::slug( $request->name ),
+        ] );
+        if ( $success ) {
+
+            return back()->with( 'success', 'Category Create Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Category Create Failed!' );
+        }
     }
 
     /**
@@ -52,7 +48,7 @@ class ProductCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( ProductCategory $productCategory ) {
-        //
+        return view( 'backend.product.category.edit', compact( 'productCategory' ) );
     }
 
     /**
@@ -63,7 +59,20 @@ class ProductCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, ProductCategory $productCategory ) {
-        //
+        $request->validate( [
+            'name' => 'required',
+        ] );
+
+        $success = $productCategory->update( [
+            'name' => $request->name,
+            'slug' => Str::slug( $request->name ),
+        ] );
+        if ( $success ) {
+
+            return redirect()->route( 'dashboard.product-category.index' )->with( 'success', 'Category Update Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.product-category.index' )->with( 'success', 'Category Update Failed!' );
+        }
     }
 
     /**
@@ -73,6 +82,7 @@ class ProductCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( ProductCategory $productCategory ) {
-        //
+        $productCategory->delete();
+        return redirect()->route( 'dashboard.product-category.index' )->with( 'success', 'Category Delete Successfully Done!' );
     }
 }

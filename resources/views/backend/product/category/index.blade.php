@@ -28,11 +28,33 @@
                         <table class="table">
                             <tr>
                                 <th>Id</th>
-                                <th>Title</th>
-                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Slug</th>
                                 <th>Action</th>
                             </tr>
+
+                            @foreach ($categories as $key => $category)
+                                <tr>
+                                    <td>{{ ++$key }}</td>
+                                    <td>{{ $category->name }}</td>
+                                    <td>{{ $category->slug }}</td>
+                                    <td>
+                                        <a href="{{ route('dashboard.product-category.edit', $category->id) }}"
+                                            class="btn btn-sm btn-primary">Edit</a>
+                                        <form action="{{ route('dashboard.product-category.destroy', $category->id) }}"
+                                            method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-sm btn-danger delete_btn">Delete</button>
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
+                    </div>
+                    <div class="card-footer">
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>
@@ -43,10 +65,15 @@
                     </div>
                     <div class="card-body">
                         <form action="{{ route('dashboard.product-category.store') }}" method="POST">
+                            @csrf
                             <div class="form-group">
                                 <label for="" class="form-label">Name: <sup class="text-danger">*</sup></label>
-                                <input type="text" name="name" class="form-control mb-2" placeholder="Category Name"
-                                    value="{{ old('name') }}">
+                                <input type="text" name="name"
+                                    class="form-control mb-2  @error('name') is-invalid @enderror"
+                                    placeholder="Category Name" value="{{ old('name') }}">
+                                @error('name')
+                                    <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
 
 
@@ -60,4 +87,29 @@
 
         </div>
     </div>
+@endsection
+
+@section('script')
+
+    <script>
+        $(function($) {
+            $('.delete_btn').on('click', function() {
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(this).parent('form').submit();
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection

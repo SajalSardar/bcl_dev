@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Sustainability;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class SustainabilityController extends Controller {
     /**
@@ -13,16 +16,8 @@ class SustainabilityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.sustainability.index' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
+        $sustainabilities = Sustainability::orderBy( 'id', 'desc' )->paginate( 20 );
+        return view( 'backend.sustainability.index', compact( 'sustainabilities' ) );
     }
 
     /**
@@ -32,17 +27,34 @@ class SustainabilityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ) {
-        //
-    }
+        $file = $request->file( 'image' );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Sustainability  $sustainability
-     * @return \Illuminate\Http\Response
-     */
-    public function show( Sustainability $sustainability ) {
-        //
+        $request->validate( [
+            "title"       => 'required|unique:sustainabilities,title',
+            "description" => 'required',
+            "image"       => 'required|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            $upload      = Image::make( $file )->crop( 600, 550 )->save( public_path( 'storage/sustainability/' . $banner_name ) );
+        }
+
+        if ( $upload ) {
+            $success = Sustainability::create( [
+                "title"       => $request->title,
+                "slug"        => Str::slug( $request->title ),
+                "description" => $request->description,
+                "image"       => $banner_name,
+            ] );
+            if ( $success ) {
+                return back()->with( 'success', 'Insert Successfully Done!' );
+            } else {
+                return back()->with( 'success', 'Insert failed!' );
+            }
+        } else {
+            return back()->with( 'error', 'File not Uploading!' );
+        }
     }
 
     /**
@@ -52,7 +64,7 @@ class SustainabilityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( Sustainability $sustainability ) {
-        //
+        return view( 'backend.sustainability.edit', compact( 'sustainability' ) );
     }
 
     /**
@@ -63,7 +75,36 @@ class SustainabilityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, Sustainability $sustainability ) {
-        //
+        $file = $request->file( 'image' );
+
+        $request->validate( [
+            "title"       => 'required|unique:sustainabilities,title,' . $sustainability->id,
+            "description" => 'required',
+            "image"       => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            if ( file_exists( public_path( 'storage/sustainability/' . $sustainability->image ) ) ) {
+                Storage::delete( 'sustainability/' . $sustainability->image );
+            }
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 600, 550 )->save( public_path( 'storage/sustainability/' . $banner_name ) );
+        } else {
+            $banner_name = $sustainability->image;
+        }
+
+        $success = $sustainability->update( [
+            "title"       => $request->title,
+            "slug"        => Str::slug( $request->title ),
+            "description" => $request->description,
+            "image"       => $banner_name,
+        ] );
+        if ( $success ) {
+            return redirect()->route( 'dashboard.sustainability.index' )->with( 'success', 'Update Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.sustainability.index' )->with( 'success', 'Update failed!' );
+        }
+
     }
 
     /**
@@ -73,6 +114,35 @@ class SustainabilityController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Sustainability $sustainability ) {
-        //
+
+        if ( file_exists( public_path( 'storage/sustainability/' . $sustainability->image ) ) ) {
+            Storage::delete( 'sustainability/' . $sustainability->image );
+        }
+        $success = $sustainability->delete();
+        if ( $success ) {
+            return redirect()->route( 'dashboard.sustainability.index' )->with( 'success', ' Delete Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.sustainability.index' )->with( 'success', ' Delete failed!' );
+        }
+    }
+
+    /**
+     * company Status Update.
+     *
+     * @param  \App\Models\Slider  $slider
+     * @return \Illuminate\Http\Response
+     */
+    public function sustainabilityStatusUpdate( Sustainability $sustainability ) {
+
+        if ( $sustainability->status == 1 ) {
+            $sustainability->update( [
+                'status' => 2,
+            ] );
+        } else {
+            $sustainability->update( [
+                'status' => 1,
+            ] );
+        }
+        return redirect()->route( 'dashboard.sustainability.index' )->with( 'success', ' Status Update Successfully Done!' );
     }
 }

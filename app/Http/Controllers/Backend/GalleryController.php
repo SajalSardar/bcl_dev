@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class GalleryController extends Controller {
     /**
@@ -13,16 +16,8 @@ class GalleryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.gallery.index' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
+        $galleries = Gallery::orderBy( 'id', 'desc' )->paginate( 30 );
+        return view( 'backend.gallery.index', compact( 'galleries' ) );
     }
 
     /**
@@ -32,17 +27,32 @@ class GalleryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ) {
-        //
-    }
+        $file = $request->file( 'image' );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Gallery  $gallery
-     * @return \Illuminate\Http\Response
-     */
-    public function show( Gallery $gallery ) {
-        //
+        $request->validate( [
+            "title" => 'required',
+            "image" => 'required|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $image_name = Str::uuid() . '.' . $file->extension();
+            $upload     = Image::make( $file )->crop( 800, 600 )->save( public_path( 'storage/gallery/' . $image_name ) );
+        }
+
+        if ( $upload ) {
+            $success = Gallery::create( [
+                "title" => $request->title,
+                "image" => $image_name,
+            ] );
+            if ( $success ) {
+
+                return back()->with( 'success', 'Gallery Store Successfully Done!' );
+            } else {
+                return back()->with( 'success', 'Gallery Insert Failed!' );
+            }
+        } else {
+            return back()->with( 'error', 'File not Uploading!' );
+        }
     }
 
     /**
@@ -52,7 +62,7 @@ class GalleryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( Gallery $gallery ) {
-        //
+        return view( 'backend.gallery.edit', compact( 'gallery' ) );
     }
 
     /**
@@ -63,7 +73,34 @@ class GalleryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, Gallery $gallery ) {
-        //
+        $file = $request->file( 'image' );
+
+        $request->validate( [
+            "title" => 'required',
+            "image" => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            if ( file_exists( public_path( 'storage/gallery/' . $gallery->image ) ) ) {
+                Storage::delete( 'gallery/' . $gallery->image );
+            }
+            $image_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 800, 600 )->save( public_path( 'storage/gallery/' . $image_name ) );
+        } else {
+            $image_name = $gallery->image;
+        }
+
+        $success = $gallery->update( [
+            "title" => $request->title,
+            "image" => $image_name,
+        ] );
+        if ( $success ) {
+
+            return redirect()->route( 'dashboard.gallery.index' )->with( 'success', 'Gallery Update Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.gallery.index' )->with( 'success', 'Gallery Update Failed!' );
+        }
+
     }
 
     /**
@@ -73,6 +110,35 @@ class GalleryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( Gallery $gallery ) {
-        //
+        if ( file_exists( public_path( 'storage/gallery/' . $gallery->image ) ) ) {
+            Storage::delete( 'gallery/' . $gallery->image );
+        }
+        $success = $gallery->delete();
+        if ( $success ) {
+
+            return redirect()->route( 'dashboard.gallery.index' )->with( 'success', 'Gallery Delete Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.gallery.index' )->with( 'success', 'Gallery Delete Failed!' );
+        }
+    }
+
+    /**
+     * product Status Update.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function galleryStatusUpdate( Gallery $gallery ) {
+
+        if ( $gallery->status == 1 ) {
+            $gallery->update( [
+                'status' => 2,
+            ] );
+        } else {
+            $gallery->update( [
+                'status' => 1,
+            ] );
+        }
+        return redirect()->route( 'dashboard.gallery.index' )->with( 'success', 'Status Update Successfully Done!' );
     }
 }

@@ -126,7 +126,7 @@ class MissionVissionController extends Controller {
     }
 
     /**
-     * Slider Status Update.
+     * mission vission Status Update.
      *
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
