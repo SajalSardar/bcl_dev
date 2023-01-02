@@ -13,16 +13,8 @@ class SocialLinkController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view( 'backend.social.index' );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create() {
-        //
+        $socials = SocialLink::all();
+        return view( 'backend.social.index', compact( 'socials' ) );
     }
 
     /**
@@ -32,17 +24,24 @@ class SocialLinkController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store( Request $request ) {
-        //
-    }
+        $request->validate( [
+            "title" => 'required|unique:social_links,title',
+            "icon"  => 'required',
+            "link"  => 'required',
+        ] );
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\SocialLink  $socialLink
-     * @return \Illuminate\Http\Response
-     */
-    public function show( SocialLink $socialLink ) {
-        //
+        $success = SocialLink::create( [
+            "title" => $request->title,
+            "icon"  => $request->icon,
+            "link"  => $request->link,
+        ] );
+        if ( $success ) {
+
+            return back()->with( 'success', 'Add Social Link Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Social Link Insert Failed!' );
+        }
+
     }
 
     /**
@@ -52,7 +51,7 @@ class SocialLinkController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit( SocialLink $socialLink ) {
-        //
+        return view( 'backend.social.edit', compact( 'socialLink' ) );
     }
 
     /**
@@ -63,7 +62,23 @@ class SocialLinkController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update( Request $request, SocialLink $socialLink ) {
-        //
+        $request->validate( [
+            "title" => 'required|unique:social_links,title,' . $socialLink->id,
+            "icon"  => 'required',
+            "link"  => 'required',
+        ] );
+
+        $success = $socialLink->create( [
+            "title" => $request->title,
+            "icon"  => $request->icon,
+            "link"  => $request->link,
+        ] );
+        if ( $success ) {
+
+            return redirect()->route( 'dashboard.social-link.index' )->with( 'success', 'Update Social Link Successfully Done!' );
+        } else {
+            return redirect()->route( 'dashboard.social-link.index' )->with( 'success', 'Social Link Update Failed!' );
+        }
     }
 
     /**
@@ -73,6 +88,31 @@ class SocialLinkController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy( SocialLink $socialLink ) {
-        //
+        $socialLink->delete();
+        return redirect()->route( 'dashboard.social-link.index' )->with( 'success', ' Social Link Deleted Successfully Done!' );
     }
+
+    /**
+     * Social link Status Update.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function socialLinkStatusUpdate( SocialLink $socialLink ) {
+
+        if ( $socialLink->status == 1 ) {
+            $socialLink->update( [
+                'status' => 2,
+            ] );
+            return redirect()->route( 'dashboard.social-link.index' )->with( 'success', 'Status Update Successfully Done!' );
+        } else {
+            $socialLink->update( [
+                'status' => 1,
+            ] );
+            return redirect()->route( 'dashboard.social-link.index' )->with( 'success', 'Status Update Successfully Done!' );
+        }
+        return redirect()->route( 'dashboard.social-link.index' )->with( 'error', 'Status Update Failed!' );
+
+    }
+
 }

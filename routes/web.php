@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\MissionVissionController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController as BackendProfileController;
+use App\Http\Controllers\Backend\SectionSettingController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SocialLinkController;
 use App\Http\Controllers\Backend\SustainabilityController;
@@ -30,9 +31,8 @@ Route::controller( FrontendController::class )->name( 'frontend.' )->group( func
     Route::get( '/contact', 'contact' )->name( 'contact' );
     Route::get( '/barison/profile', 'profile' )->name( 'profile' );
 } );
-
-Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified'] )->group( function () {
-    Route::get( '/', [BackendController::class, 'index'] )->name( 'index' );
+Route::get( '/dashboard', [BackendController::class, 'index'] )->name( 'dashboard.index' )->middleware( ['auth', 'verified'] );
+Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified', 'admin'] )->group( function () {
     Route::resource( '/slider', SliderController::class )->except( ['create', 'show'] );
     Route::get( '/slider/status/update/{slider}', [SliderController::class, 'sliderStatusUpdate'] )->name( 'slider.status.update' );
     Route::resource( '/mission-vission', MissionVissionController::class )->except( ['create', 'show'] );
@@ -57,6 +57,10 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
     Route::resource( '/home-mission', HomeMissionController::class )->only( ['index', 'update'] );
     Route::resource( '/employee', EmployeeController::class )->only( ['index', 'update'] );
     Route::resource( '/social-link', SocialLinkController::class );
+    Route::get( '/social-link/status/{socialLink}', [SocialLinkController::class, 'socialLinkStatusUpdate'] )->name( 'social.status.update' );
+
+    Route::get( '/section-settings', [SectionSettingController::class, 'sectionSettings'] )->name( 'setting.section' );
+    Route::post( '/section-settings', [SectionSettingController::class, 'sectionSettingsUpdate'] )->name( 'setting.section.update' );
 } );
 
 Route::middleware( 'auth' )->group( function () {
