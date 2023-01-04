@@ -102,6 +102,9 @@ class ContactController extends Controller {
 
     public function contactMessageShow( $id ) {
         $message = ContactMessage::findOrFail( $id );
+        $message->update( [
+            "status" => 2,
+        ] );
         return view( 'backend.contact.show', compact( 'message' ) );
     }
 

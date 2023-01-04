@@ -2,7 +2,7 @@
 @section('title', 'Gallery')
 @section('content')
     <!-- breadcrumbs -->
-    <section id="breadcrumbs" style="background: url({{ asset('frontend/images/slider-2.jpg') }}) ">
+    <section id="breadcrumbs" style="background: url({{ asset('storage/uploads/' . $page_banner->banner) }}) ">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -25,44 +25,16 @@
     <section id="gallery_page">
         <div class="container">
             <div class="row filter_container">
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <a href="{{ asset('frontend/images/vission.jpg') }}" class="gallery" data-gall="gallery01">
-                            <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        </a>
+                @foreach ($galleries as $gallery)
+                    <div class="col-lg-4 men mix wow fadeInUp">
+                        <div class="product_block">
+                            <a href="{{ asset('storage/gallery/' . $gallery->image) }}" class="gallery"
+                                data-gall="gallery01">
+                                <img src="{{ asset('storage/gallery/' . $gallery->image) }}" alt="{{ $gallery->title }}">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <a href="{{ asset('frontend/images/vission.jpg') }}" class="gallery" data-gall="gallery01"><img
-                                src="{{ asset('frontend/images/vission.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <a href="{{ asset('frontend/images/vission.jpg') }}" class="gallery" data-gall="gallery01"><img
-                                src="{{ asset('frontend/images/vission.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <a href="{{ asset('frontend/images/vission.jpg') }}" class="gallery" data-gall="gallery01"><img
-                                src="{{ asset('frontend/images/vission.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <a href="{{ asset('frontend/images/vission.jpg') }}" class="gallery" data-gall="gallery01"><img
-                                src="{{ asset('frontend/images/vission.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <a href="{{ asset('frontend/images/vission.jpg') }}" class="gallery" data-gall="gallery01"><img
-                                src="{{ asset('frontend/images/vission.jpg') }}" alt=""></a>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>

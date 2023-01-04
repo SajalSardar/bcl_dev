@@ -2,7 +2,7 @@
 @section('title', 'Profile')
 @section('content')
     <!-- breadcrumbs -->
-    <section id="breadcrumbs" style="background: url({{ asset('frontend/images/slider-2.jpg') }})">
+    <section id="breadcrumbs" style="background: url({{ asset('storage/uploads/' . $page_banner->banner) }})">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -29,46 +29,12 @@
                 <div class="col-md-12">
                     <div class="about_page">
                         <h3>
-                            Bulid a Bright Future Fore Bangladesh
-                            <a href="#" download="" class="custom_btn">Download Profile</a>
+                            {{ $profile->title }}
+                            <a href="{{ route('frontend.profile.download') }}" class="custom_btn">Download
+                                Profile</a>
                         </h3>
-                        <img src="{{ asset('frontend/images/sustain.jpg') }}" width="400" alt="">
-                        <p>
-                            The self-sustaining planet Earth We live in this sphere. It&#39;s a house we lovingly recognize.
-                            Over the
-                            past
-                            decade, we have dedicated our efforts to reveal human spirit for the Earth&#39;s, including all
-                            of its
-                            surroundings, to grow harmoniously. These exact efforts and tireless attempts of ours to
-                            comprehend
-                            the goals and aspirations of our clients have forged a solid collaboration between us that
-                            enables us to
-                            develop successful state-of-the-art solutions to adapt, develop, and implement designs for a
-                            constantly
-                            changing environment. We specialize in knit, woven, denim, sweaters, formal wear for men, women,
-                            &amp;
-                            kids, T-shirts, polo shirts, aprons, casual shirts, coverall, and safety wear items.
-                        </p>
-
-                        <p>As woven manufacturer we know that woven must be hard wearing so that they can live up to the
-                            demands of every day life. Our philosophy is to provide good quality, hard wearing .</p>
-                        <p>From east to west, our products serve the entire world, including Europe, America, Africa, and
-                            Asia.</p>
-                        <p>We utilize top-notch raw materials and accessories to deliver affordable prices, the proper
-                            quality, and
-                            quick lead times. We also have a manufacturing facility of our own.</p>
-                        <p>We uphold high standards for our business practices, ethics, and social obligations, and we
-                            constantly
-                            seek to implement the most cutting-edge and efficient technology available. We have management,
-                            merchandisers, quality controllers, technical planners, commercial &amp; logistic staff, and
-                            management on
-                            our team.</p>
-                        <p>Barisons Creations Ltd. started its journey as a house of Readymade Garments (RMG) engaged in
-                            manufacturing and exporting of Knit Apparels since 2012 and has been considered today as one of
-                            the
-                            woven garments. Its cutting-edge garment production plant offers clients a one-stop shopping
-                            experience. We have established ourselves as an important garments manufacturer for a number of
-                            renowned brand apparels of Europe, USA &amp; Australia.Garments Divisions</p>
+                        <img src="{{ asset('storage/uploads/' . $profile->image) }}" width="400" alt="">
+                        {!! $profile->description !!}
                     </div>
 
                 </div>

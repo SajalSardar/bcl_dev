@@ -31,7 +31,9 @@ Route::controller( FrontendController::class )->name( 'frontend.' )->group( func
     Route::get( '/sustainability', 'sustainability' )->name( 'sustainability' );
     Route::get( '/gallery', 'gallery' )->name( 'gallery' );
     Route::get( '/contact', 'contact' )->name( 'contact' );
+    Route::post( '/contact', 'contactStore' )->name( 'contact.store' );
     Route::get( '/barison/profile', 'profile' )->name( 'profile' );
+    Route::get( '/profile/download', 'downloadProfile' )->name( 'profile.download' );
 } );
 Route::get( '/dashboard', [BackendController::class, 'index'] )->name( 'dashboard.index' )->middleware( ['auth', 'verified'] );
 Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified', 'admin'] )->group( function () {

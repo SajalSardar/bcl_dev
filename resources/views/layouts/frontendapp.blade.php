@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    <link type="text/css" href="{{ asset('backend/css/sweetalert2.min.css') }}" rel="stylesheet">
     @yield('css')
 </head>
 
@@ -164,7 +165,9 @@
     <script src="{{ asset('frontend/js/jquery.counterup.min.js') }}"></script>
     <script src="{{ asset('frontend/js/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/js/script.js') }}"></script>
+    <script src="{{ asset('backend/js/sweetalert2.min.js') }}"></script>
 
+    @include('flashmessage')
     @yield('js')
 </body>
 

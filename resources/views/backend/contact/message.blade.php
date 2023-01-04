@@ -26,7 +26,7 @@
                     </div>
                     <div class="card-body">
                         <table class="table">
-                            <tr>
+                            <tr class="table-dark">
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
@@ -36,7 +36,7 @@
                                 <th>Action</th>
                             </tr>
                             @foreach ($messages as $message)
-                                <tr>
+                                <tr class="{{ $message->status == 1 ? 'font-weight-bold' : '' }}">
                                     <td>{{ $message->id }}</td>
                                     <td>{{ $message->name }}</td>
                                     <td>{{ $message->email }}</td>
