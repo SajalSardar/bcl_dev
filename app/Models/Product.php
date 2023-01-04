@@ -14,4 +14,8 @@ class Product extends Model {
      * @var array
      */
     protected $guarded = ['id'];
+
+    public function category() {
+        return $this->belongsTo( ProductCategory::class, 'product_category_id' );
+    }
 }

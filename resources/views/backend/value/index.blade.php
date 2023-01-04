@@ -36,8 +36,8 @@
                             @foreach ($values as $value)
                                 <tr>
                                     <td>{{ $value->id }}</td>
-                                    <td><img src="{{ asset('storage/value/' . $value->banner) }}" id="show_img"
-                                            alt="" width="100"></td>
+                                    <td><img src="{{ asset('storage/value/' . $value->banner) }}" alt=""
+                                            width="100"></td>
                                     <td>{{ $value->title }}</td>
                                     <td>
                                         <span

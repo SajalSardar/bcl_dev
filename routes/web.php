@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller( FrontendController::class )->name( 'frontend.' )->group( function () {
     Route::get( '/', 'index' )->name( 'index' );
     Route::get( '/about', 'about' )->name( 'about' );
+    Route::get( '/about/{slug}', 'aboutBlockSingle' )->name( 'about.block.single' );
     Route::get( '/product', 'product' )->name( 'product' );
     Route::get( '/sustainability', 'sustainability' )->name( 'sustainability' );
     Route::get( '/gallery', 'gallery' )->name( 'gallery' );

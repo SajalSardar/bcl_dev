@@ -14,4 +14,8 @@ class ProductCategory extends Model {
      * @var array
      */
     protected $guarded = ['id'];
+
+    public function products() {
+        return $this->hasMany( Product::class );
+    }
 }

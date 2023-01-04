@@ -2,7 +2,7 @@
 @section('title', 'Product')
 @section('content')
     <!-- breadcrumbs -->
-    <section id="breadcrumbs" style="background: url({{ asset('frontend/images/slider-2.jpg') }})">
+    <section id="breadcrumbs" style="background: url({{ asset('storage/uploads/' . $page_banner->banner) }})">
         <div class="container">
             <div class="row">
                 <div class="col-12">
@@ -29,170 +29,29 @@
                     <div class="product_menu wow fadeInUp">
                         <ul>
                             <li class="active" data-filter="all">All</li>
-                            <li data-filter=".men">Mens</li>
-                            <li data-filter=".women">Women</li>
-                            <li data-filter=".child">Child</li>
+                            @foreach ($categories as $category)
+                                <li data-filter=".{{ $category->slug }}">{{ $category->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row filter_container">
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
+                @foreach ($products as $product)
+                    <div class="col-lg-4 {{ $product->category->slug }} mix wow fadeInUp ">
+                        <div class="product_block">
+                            <img src="{{ asset('storage/product/' . $product->image) }}" alt="{{ $product->title }}">
+                            <div class="product_caption">
+                                <div>
+                                    <a href="{{ asset('storage/product/' . $product->image) }}" class="productitme"
+                                        data-gall="productgall"><i class="fas fa-plus"></i></a>
+                                    <h4>{{ $product->title }}</h4>
+                                    <p>{{ $product->description }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 mix women wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix child wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix men wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix child wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix child women wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 men mix wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix women wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix child wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix men wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix child wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mix child women wow fadeInUp">
-                    <div class="product_block">
-                        <img src="{{ asset('frontend/images/vission.jpg') }}" alt="">
-                        <div class="product_caption">
-                            <div>
-                                <h4>product title</h4>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto quidem quisquam cumque
-                                    incidunt
-                                    expedita quia distinctio voluptate reiciendis nisi impedit.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>
@@ -200,10 +59,22 @@
     <!-- product page main end -->
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}">
+@endsection
 
 @section('js')
+    <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
     <script src="{{ asset('frontend/js/mixitup.min.js') }}"></script>
     <script>
         var mixer = mixitup('.filter_container');
+
+        new VenoBox({
+            selector: ".productitme",
+            spinner: "flow",
+            spinColor: "rgb(228, 1, 1) ",
+            toolsColor: "rgb(228, 1, 1) ",
+            border: "10px",
+        });
     </script>
 @endsection

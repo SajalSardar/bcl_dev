@@ -36,15 +36,7 @@
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
                             </div>
-                            <div class="form-group ">
-                                <label for="" class="form-label">Description: <sup
-                                        class="text-danger">*</sup></label>
-                                <textarea name="description" class="form-control mb-2 @error('description') is-invalid @enderror" rows="8"
-                                    placeholder="description">{{ old('description') }}</textarea>
-                                @error('description')
-                                    <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
+
                             <div class="form-group ">
                                 <label for="" class="form-label">Description: <sup
                                         class="text-danger">*</sup></label>
@@ -128,8 +120,7 @@
                                             method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="button"
-                                                class="btn btn-sm btn-danger delete_btn">Delete</button>
+                                            <button type="button" class="btn btn-sm btn-danger delete_btn">Delete</button>
 
                                         </form>
                                         <a

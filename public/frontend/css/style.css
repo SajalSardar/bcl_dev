@@ -786,6 +786,7 @@ p{
     align-items: center;
     transform: scale(0);
     transition: .5s;
+    justify-content: center;
 }
 .product_block:hover .product_caption{
     transform: scale(1);
@@ -798,6 +799,22 @@ p{
 
 .product_caption p{
     color: #ccc;
+}
+.product_caption i{
+    color: #fff;
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin-bottom: 10px;
+    line-height: 40px;
+    transition: .5s;
+}
+.product_caption i:hover{
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .product_menu{
