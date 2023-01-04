@@ -25,22 +25,27 @@
             <div class="row align-items-center justify-content-center">
                 <div class="col-sm-4">
                     <div class="header_contact">
-                        <p><i class="fas fa-phone"></i> <a href="tel:0123654789">0123654789</a></p>
+                        <p><i class="fas fa-phone"></i> <a
+                                href="tel:{{ $themeOption->header_number }}">{{ $themeOption->header_number }}</a>
+                        </p>
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="header_menu">
                         <ul>
-                            <li><a href="#"><i class="far fa-arrow-alt-circle-right"></i> Login</a></li>
+                            <li><a href="{{ route('login') }}"><i class="far fa-arrow-alt-circle-right"></i> Login</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class=" col-sm-4">
                     <div class="social_media">
                         <ul>
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            @foreach ($socialLinks as $socialLink)
+                                <li><a target="_blank" href="{{ $socialLink->link }}"><i
+                                            class="fab {{ $socialLink->icon }}"></i></a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -51,8 +56,8 @@
     <!-- menu part  -->
     <nav class="navbar navbar-expand-lg wow fadeInUp" id="main_navigation">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('frontend/images/logo.png') }}" alt="" width="150">
+            <a class="navbar-brand" href="{{ route('frontend.index') }}">
+                <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" alt="" width="150">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_menu">
                 <i class="fas fa-bars"></i>
@@ -101,65 +106,47 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer_contact">
-                        <h4>Holytex Ltd.</h4>
-                        <div class="d-flex">
-                            <i class="fas fa-map-location"></i>
-                            <p>
-                                91, Sarwardi Avenue (2nd Floor)
-                                Baridhara, Dhaka-1212, Bangladesh
-                            </p>
-                        </div>
+                        <h4>{{ $themeOption->footer_one_title }}</h4>
+                        {!! $themeOption->footer_one !!}
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer_contact">
-                        <h4>Barison Creation Ltd</h4>
-                        <div class="d-flex">
-                            <i class="fas fa-map-location"></i>
-                            <p>Monipur (Uttarpara),Bhabanipur,
-                                Bhawalgarh,Gazipur Sadar,Gazipur,
-                                Bangladesh.</p>
-                        </div>
+                        <h4>{{ $themeOption->footer_two_title }}</h4>
+                        {!! $themeOption->footer_two !!}
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer_contact">
-                        <h4>Contact</h4>
-                        <ul>
-                            <li><i class="fas fa-user"></i> Mr. Shafiq (Managing Director)</li>
-                            <li><i class="fas fa-envelope"></i> holytex@btinternet.com</li>
-                            <li><i class="fas fa-phone"></i> 0123546987</li>
-                        </ul>
+                        <h4>{{ $themeOption->footer_three_title }}</h4>
+                        {!! $themeOption->footer_three !!}
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer_contact">
-                        <h4>Usefull Links</h4>
-                        <ul>
-                            <li><a href="#"><i class="far fa-arrow-alt-circle-right"></i>About</a></li>
-                            <li><a href="#"><i class="far fa-arrow-alt-circle-right"></i>Services</a></li>
-                            <li><a href="#"><i class="far fa-arrow-alt-circle-right"></i>Contact</a></li>
-                        </ul>
+                        <h4>{{ $themeOption->footer_four_title }}</h4>
+                        {!! $themeOption->footer_four !!}
                     </div>
                 </div>
             </div>
             <div class="row bottom_footer align-items-center">
                 <div class="col-lg-3 col-md-3">
                     <div class="footer_logo">
-                        <img src="{{ asset('frontend/images/Chaity-Group-Logo.png') }}" width="70"
-                            alt="">
+                        <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" width="100" alt="">
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-5">
                     <div class="footer_copy text-center">
-                        <p>Copyright &copy; 2022 Barison Creation Ltd. All right reserved</p>
+                        <p>{{ $themeOption->bottom_footer }}</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <ul class="footer_social">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        @foreach ($socialLinks as $socialLink)
+                            <li><a target="_blank" href="{{ $socialLink->link }}"><i
+                                        class="fab {{ $socialLink->icon }}"></i></a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

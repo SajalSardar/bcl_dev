@@ -52,7 +52,7 @@
                                 <label for="" class="form-label">Upload New Image or Video:</label>
                                 <input type="file" name="slide"
                                     class="form-control mb-2 @error('slide') is-invalid @enderror">
-                                <p style="color: rgba(54, 76, 102, 0.7)">Select Image 1920x800 Or Video File!</p>
+                                <p style="color: rgba(54, 76, 102, 0.7)">Select Image 1700x700 Or Video File!</p>
                                 @error('slide')
                                     <p class="text-danger">{{ $message }} </p>
                                 @enderror

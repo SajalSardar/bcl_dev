@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\PageBanner;
 use App\Models\Sustainability;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,7 +18,8 @@ class SustainabilityController extends Controller {
      */
     public function index() {
         $sustainabilities = Sustainability::orderBy( 'id', 'desc' )->paginate( 20 );
-        return view( 'backend.sustainability.index', compact( 'sustainabilities' ) );
+        $page_header      = PageBanner::where( 'page', 'sustainability' )->firstOrFail();
+        return view( 'backend.sustainability.index', compact( 'sustainabilities', 'page_header' ) );
     }
 
     /**
@@ -144,5 +146,31 @@ class SustainabilityController extends Controller {
             ] );
         }
         return redirect()->route( 'dashboard.sustainability.index' )->with( 'success', ' Status Update Successfully Done!' );
+    }
+
+    public function sustainabilityPageHeader( Request $request, $id ) {
+        $file        = $request->file( 'header_banner' );
+        $page_header = PageBanner::where( 'id', $id )->firstOrFail();
+
+        $request->validate( [
+            "header_banner" => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 1700, 500 )->save( public_path( 'storage/uploads/' . $banner_name ) );
+        } else {
+            $banner_name = $page_header->banner;
+        }
+
+        $update = $page_header->update( [
+            "banner" => $banner_name,
+        ] );
+
+        if ( $update ) {
+            return back()->with( 'success', 'Update Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Update Fail!' );
+        }
     }
 }

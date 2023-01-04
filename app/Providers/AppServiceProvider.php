@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\SocialLink;
+use App\Models\ThemeOption;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -23,5 +26,8 @@ class AppServiceProvider extends ServiceProvider {
     public function boot() {
         //
         Paginator::useBootstrapFive();
+        $themeOption = ThemeOption::first();
+        $socialLinks = SocialLink::all();
+        View::share( ['themeOption' => $themeOption, 'socialLinks' => $socialLinks] );
     }
 }

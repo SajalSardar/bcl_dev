@@ -53,7 +53,7 @@ class SliderController extends Controller {
                 ] );
                 $image_name = Str::uuid() . '.' . $file->extension();
                 $type       = "image";
-                $upload     = Image::make( $file )->crop( 1920, 800 )->save( public_path( 'storage/slide/' . $image_name ) );
+                $upload     = Image::make( $file )->crop( 1700, 700 )->save( public_path( 'storage/slide/' . $image_name ) );
             }
         }
 
@@ -124,7 +124,7 @@ class SliderController extends Controller {
                 }
                 $image_name = Str::uuid() . '.' . $file->extension();
                 $type       = "image";
-                $upload     = Image::make( $file )->crop( 1920, 800 )->save( public_path( 'storage/slide/' . $image_name ) );
+                $upload     = Image::make( $file )->crop( 1700, 700 )->save( public_path( 'storage/slide/' . $image_name ) );
             }
         } else {
             $image_name = $slider->slide;

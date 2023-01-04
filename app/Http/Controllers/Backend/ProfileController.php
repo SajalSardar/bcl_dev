@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\PageBanner;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,8 +17,9 @@ class ProfileController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $profile = Profile::firstOrfail();
-        return view( 'backend.profile.index', compact( 'profile' ) );
+        $profile     = Profile::firstOrfail();
+        $page_header = PageBanner::where( 'page', 'profile' )->firstOrFail();
+        return view( 'backend.profile.index', compact( 'profile', 'page_header' ) );
     }
 
     /**
@@ -72,6 +74,32 @@ class ProfileController extends Controller {
             return back()->with( 'success', 'Profile Update Failed!' );
         }
 
+    }
+
+    public function profilePageHeader( Request $request, $id ) {
+        $file        = $request->file( 'header_banner' );
+        $page_header = PageBanner::where( 'id', $id )->firstOrFail();
+
+        $request->validate( [
+            "header_banner" => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 1700, 500 )->save( public_path( 'storage/uploads/' . $banner_name ) );
+        } else {
+            $banner_name = $page_header->banner;
+        }
+
+        $update = $page_header->update( [
+            "banner" => $banner_name,
+        ] );
+
+        if ( $update ) {
+            return back()->with( 'success', 'Update Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Update Fail!' );
+        }
     }
 
 }

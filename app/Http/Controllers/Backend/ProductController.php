@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\PageBanner;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
@@ -17,9 +18,10 @@ class ProductController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $categories = ProductCategory::all();
-        $products   = Product::orderBy( 'id', 'desc' )->paginate( 30 );
-        return view( 'backend.product.index', compact( 'categories', 'products' ) );
+        $categories  = ProductCategory::all();
+        $products    = Product::orderBy( 'id', 'desc' )->paginate( 30 );
+        $page_header = PageBanner::where( 'page', 'product' )->firstOrFail();
+        return view( 'backend.product.index', compact( 'categories', 'products', 'page_header' ) );
     }
 
     /**
@@ -152,5 +154,31 @@ class ProductController extends Controller {
             ] );
         }
         return redirect()->route( 'dashboard.product.index' )->with( 'success', 'Status Update Successfully Done!' );
+    }
+
+    public function productPageHeader( Request $request, $id ) {
+        $file        = $request->file( 'header_banner' );
+        $page_header = PageBanner::where( 'id', $id )->firstOrFail();
+
+        $request->validate( [
+            "header_banner" => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 1700, 500 )->save( public_path( 'storage/uploads/' . $banner_name ) );
+        } else {
+            $banner_name = $page_header->banner;
+        }
+
+        $update = $page_header->update( [
+            "banner" => $banner_name,
+        ] );
+
+        if ( $update ) {
+            return back()->with( 'success', 'Update Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Update Fail!' );
+        }
     }
 }

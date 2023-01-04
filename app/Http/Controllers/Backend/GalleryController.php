@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
+use App\Models\PageBanner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -16,8 +17,9 @@ class GalleryController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $galleries = Gallery::orderBy( 'id', 'desc' )->paginate( 30 );
-        return view( 'backend.gallery.index', compact( 'galleries' ) );
+        $galleries   = Gallery::orderBy( 'id', 'desc' )->paginate( 30 );
+        $page_header = PageBanner::where( 'page', 'gallery' )->firstOrFail();
+        return view( 'backend.gallery.index', compact( 'galleries', 'page_header' ) );
     }
 
     /**
@@ -140,5 +142,31 @@ class GalleryController extends Controller {
             ] );
         }
         return redirect()->route( 'dashboard.gallery.index' )->with( 'success', 'Status Update Successfully Done!' );
+    }
+
+    public function galleryPageHeader( Request $request, $id ) {
+        $file        = $request->file( 'header_banner' );
+        $page_header = PageBanner::where( 'id', $id )->firstOrFail();
+
+        $request->validate( [
+            "header_banner" => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 1700, 500 )->save( public_path( 'storage/uploads/' . $banner_name ) );
+        } else {
+            $banner_name = $page_header->banner;
+        }
+
+        $update = $page_header->update( [
+            "banner" => $banner_name,
+        ] );
+
+        if ( $update ) {
+            return back()->with( 'success', 'Update Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Update Fail!' );
+        }
     }
 }

@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\ContactMessage;
+use App\Models\PageBanner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class ContactController extends Controller {
     /**
@@ -13,8 +17,9 @@ class ContactController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $contact = Contact::firstOrFail();
-        return view( 'backend.contact.index', compact( 'contact' ) );
+        $contact     = Contact::firstOrFail();
+        $page_header = PageBanner::where( 'page', 'contact' )->firstOrFail();
+        return view( 'backend.contact.index', compact( 'contact', 'page_header' ) );
     }
 
     /**
@@ -57,4 +62,47 @@ class ContactController extends Controller {
             return back()->with( 'success', 'Contact Update Failed!' );
         }
     }
+
+    public function contactPageHeader( Request $request, $id ) {
+        $file        = $request->file( 'header_banner' );
+        $page_header = PageBanner::where( 'id', $id )->firstOrFail();
+
+        $request->validate( [
+            "header_banner" => 'nullable|max:512|mimes:png,jpg,webp',
+        ] );
+
+        if ( $file ) {
+            $banner_name = Str::uuid() . '.' . $file->extension();
+            Image::make( $file )->crop( 1700, 500 )->save( public_path( 'storage/uploads/' . $banner_name ) );
+        } else {
+            $banner_name = $page_header->banner;
+        }
+
+        $update = $page_header->update( [
+            "banner" => $banner_name,
+        ] );
+
+        if ( $update ) {
+            return back()->with( 'success', 'Update Successfully Done!' );
+        } else {
+            return back()->with( 'success', 'Update Fail!' );
+        }
+    }
+
+    public function contactMessage() {
+        $messages = ContactMessage::orderBy( 'id', 'desc' )->paginate( 30 );
+        return view( 'backend.contact.message', compact( 'messages' ) );
+    }
+
+    public function contactMessageDelete( $id ) {
+        $message = ContactMessage::findOrFail( $id );
+        $message->delete();
+        return back()->with( 'success', 'Delete Successfully Done!' );
+    }
+
+    public function contactMessageShow( $id ) {
+        $message = ContactMessage::findOrFail( $id );
+        return view( 'backend.contact.show', compact( 'message' ) );
+    }
+
 }
