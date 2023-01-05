@@ -42,27 +42,28 @@
     </section>
     <!-- about main part end -->
 
-
-    <section id="about_page_block_main" class="wow fadeInUp">
-        <div class="container">
-            <div class="row align-items-center">
-                @foreach ($missionVission as $missionVission)
-                    <div class="col-md-6">
-                        <div class="about_page_block_part">
-                            <img src="{{ asset('storage/about_page_block/' . $missionVission->image) }}"
-                                alt="{{ $missionVission->title }}">
-                            <div class="block_content">
-                                <h3>{{ $missionVission->title }}</h3>
-                                <p>{!! Str::limit($missionVission->description, 200, '...') !!}</p>
-                                <a href="{{ route('frontend.about.block.single', $missionVission->slug) }}"
-                                    class="custom_btn">Read More</a>
+    @if ($masterSectionSettings['aboutBlock'] === 1)
+        <section id="about_page_block_main" class="wow fadeInUp">
+            <div class="container">
+                <div class="row align-items-center">
+                    @foreach ($missionVission as $missionVission)
+                        <div class="col-md-6">
+                            <div class="about_page_block_part">
+                                <img src="{{ asset('storage/about_page_block/' . $missionVission->image) }}"
+                                    alt="{{ $missionVission->title }}">
+                                <div class="block_content">
+                                    <h3>{{ $missionVission->title }}</h3>
+                                    <p>{!! Str::limit($missionVission->description, 200, '...') !!}</p>
+                                    <a href="{{ route('frontend.about.block.single', $missionVission->slug) }}"
+                                        class="custom_btn">Read More</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
 
 
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 @endsection
