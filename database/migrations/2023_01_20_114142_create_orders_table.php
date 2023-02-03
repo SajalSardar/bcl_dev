@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string( 'style' )->nullable();
             $table->integer( 'quantity' );
             $table->string( 'fabrication' )->nullable();
+
             $table->string( 'sc_so_fr_status' )->nullable();
             $table->string( 'bom_create' )->nullable();
             $table->string( 'fabric_sourcing_country' )->nullable();
@@ -78,7 +79,7 @@ return new class extends Migration {
             $table->date( 'shipping_sample_sent' )->nullable();
             $table->date( 'black_seal_approved' )->nullable();
 
-            $table->integer( 'status' )->default( 1 );
+            $table->integer( 'status' )->default( 1 )->comment( '1=running, 2=deactive, 3=compleated' );
             $table->softDeletes();
             $table->timestamps();
         } );
