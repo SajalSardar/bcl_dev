@@ -35,9 +35,23 @@
                     <div class="col-sm-4">
                         <div class="header_menu">
                             <ul>
-                                <li><a href="{{ route('login') }}"><i class="far fa-arrow-alt-circle-right"></i>
-                                        Login</a>
-                                </li>
+                                @guest()
+                                    <li><a href="{{ route('login') }}"><i class="far fa-arrow-alt-circle-right"></i>
+                                            Login</a>
+                                    </li>
+                                @else
+                                    <li>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                                      this.closest('form').submit();">
+                                                <i class="far fa-arrow-alt-circle-right"></i> {{ __('Log Out') }}
+                                            </a>
+                                        </form>
+                                    </li>
+                                @endguest
                             </ul>
                         </div>
                     </div>

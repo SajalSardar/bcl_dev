@@ -131,7 +131,7 @@ class SliderController extends Controller {
             $type       = $slider->slide_type;
         }
 
-        $success = Slider::create( [
+        $success = $slider->update( [
             "title"       => $request->title,
             "description" => $request->description,
             "slide"       => $image_name,

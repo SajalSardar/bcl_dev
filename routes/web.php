@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\HomeAboutController;
 use App\Http\Controllers\Backend\HomeMissionController;
 use App\Http\Controllers\Backend\MissionVissionController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController as BackendProfileController;
@@ -99,6 +100,12 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
         Route::get( '/users', 'index' )->name( 'index' );
         Route::get( '/user/create', 'create' )->name( 'create' );
         Route::post( '/user/create', 'store' )->name( 'store' );
+    } );
+
+    Route::controller( OrderController::class )->prefix( 'order' )->name( 'order.' )->group( function () {
+        Route::get( '/', 'index' )->name( 'index' );
+        Route::get( '/crete', 'create' )->name( 'create' );
+        Route::post( '/crete', 'store' )->name( 'store' );
     } );
 
 } );

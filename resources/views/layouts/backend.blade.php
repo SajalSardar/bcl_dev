@@ -160,7 +160,33 @@
                                         <span class="sidebar-menu-text">Dashboards</span>
                                     </a>
                                 </li>
+
                                 @if (Auth::user()->role === 'admin')
+                                    <li
+                                        class="sidebar-menu-item {{ request()->routeIs('dashboard.order.*') ? 'active open' : '' }}">
+                                        <a class="sidebar-menu-button" data-toggle="collapse" href="#order_menu">
+                                            <i
+                                                class="sidebar-menu-icon sidebar-menu-icon--left material-icons">slideshow</i>
+                                            <span class="sidebar-menu-text">Order</span>
+                                            <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                                        </a>
+                                        <ul class="sidebar-submenu collapse" id="order_menu">
+                                            <li
+                                                class="sidebar-menu-item {{ request()->routeIs('dashboard.order.index') ? 'active' : '' }}">
+                                                <a class="sidebar-menu-button"
+                                                    href="{{ route('dashboard.order.index') }}">
+                                                    <span class="sidebar-menu-text">All Orders</span>
+                                                </a>
+                                            </li>
+                                            <li
+                                                class="sidebar-menu-item {{ request()->routeIs('dashboard.order.create') ? 'active' : '' }}">
+                                                <a class="sidebar-menu-button"
+                                                    href="{{ route('dashboard.order.create') }}">
+                                                    <span class="sidebar-menu-text">Create Order</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
                                     <li
                                         class="sidebar-menu-item {{ request()->routeIs(['dashboard.home-about.*', 'dashboard.home-mission.*', 'dashboard.employee.*']) ? 'active open' : '' }}">
                                         <a class="sidebar-menu-button" data-toggle="collapse" href="#section_menu">
