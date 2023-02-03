@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\OrderExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
@@ -120,4 +121,15 @@ class OrderController extends Controller {
             return back()->with( 'error', 'Order Not Created!' );
         }
     }
+
+    public function show( Order $order ) {
+        return view( 'backend.order.show', compact( 'order' ) );
+    }
+
+    public function downloadOrder( Order $order ) {
+
+        return ( new OrderExport( $order->id ) )->download( $order->art_po . '_order.xlsx' );
+        //return Excel::download( new OrderExport( $order ), $order->art_po . '_order.xlsx' );
+    }
+
 }

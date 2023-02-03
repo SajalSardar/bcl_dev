@@ -106,6 +106,10 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
         Route::get( '/', 'index' )->name( 'index' );
         Route::get( '/crete', 'create' )->name( 'create' );
         Route::post( '/crete', 'store' )->name( 'store' );
+        Route::get( '/show/{order}', 'show' )->name( 'show' );
+        Route::get( '/edit/{order}', 'edit' )->name( 'edit' );
+        Route::put( '/update/{order}', 'update' )->name( 'update' );
+        Route::get( '/download/{order}', 'downloadOrder' )->name( 'download' );
     } );
 
 } );

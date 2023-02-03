@@ -1,4 +1,3 @@
-@
 @extends('layouts.backend')
 @section('title', 'Order')
 
@@ -23,7 +22,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="btn-group nav nav-tabs">
+                        <div class="btn-group nav nav-tabs mb-3">
                             <a class="btn btn-primary active" data-toggle="tab" href="#activeOrder">Active
                                 Order</a>
                             <a class="btn btn-primary" data-toggle="tab" href="#deactive">Deactive
@@ -60,7 +59,8 @@
                                                     class="badge {{ $order->status == 1 ? 'badge-success' : 'badge-warning' }}">{{ $order->status == 1 ? 'Running' : 'Order Done' }}</span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
+                                                <a href="{{ route('dashboard.order.show', $order->id) }}"
+                                                    class="btn btn-sm btn-info">View</a>
                                                 <a href="#" class="btn btn-sm btn-primary">Edit</a>
                                                 <form action="#" method="POST" class="d-inline">
                                                     @csrf
@@ -105,7 +105,8 @@
                                                     class="badge {{ $order->status == 2 ? 'badge-info' : '' }}">{{ $order->status == 2 ? 'Deactive' : '' }}</span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
+                                                <a href="{{ route('dashboard.order.show', $order->id) }}"
+                                                    class="btn btn-sm btn-info">View</a>
                                                 <a href="#" class="btn btn-sm btn-primary">Edit</a>
                                                 <form action="#" method="POST" class="d-inline">
                                                     @csrf
@@ -150,7 +151,8 @@
                                                     class="badge {{ $order->status == 3 ? 'badge-success' : '' }}">{{ $order->status == 3 ? 'Done' : '' }}</span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">View</a>
+                                                <a href="{{ route('dashboard.order.show', $order->id) }}"
+                                                    class="btn btn-sm btn-info">View</a>
                                                 <a href="#" class="btn btn-sm btn-primary">Edit</a>
                                                 <form action="#" method="POST" class="d-inline">
                                                     @csrf

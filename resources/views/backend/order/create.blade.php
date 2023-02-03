@@ -584,9 +584,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="" class="form-label">Remarks:</label>
-                                <input type="text" name="remarks" placeholder="Remarks"
-                                    class="form-control mb-2 @error('remarks') is-invalid @enderror"
-                                    value="{{ old('remarks') }}">
+                                <textarea name="" name="remarks" placeholder="Remarks"
+                                    class="form-control mb-2 @error('remarks') is-invalid @enderror" rows="4">{{ old('remarks') }}</textarea>
+
                                 @error('remarks')
                                     <p class="text-danger">{{ $message }}</p>
                                 @enderror
@@ -681,23 +681,6 @@
 
         $(document).ready(function() {
             $('.select2').select2();
-        });
-        //page banner change
-        let head_imgf = document.getElementById("page_file_input");
-        let head_output = document.getElementById("page_show_img");
-
-        head_imgf.addEventListener("change", function(event) {
-            let tmppath = URL.createObjectURL(event.target.files[0]);
-            head_output.src = tmppath;
-        });
-
-        //image change
-        let imgf = document.getElementById("file_input");
-        let output = document.getElementById("show_img");
-
-        imgf.addEventListener("change", function(event) {
-            let tmppath = URL.createObjectURL(event.target.files[0]);
-            output.src = tmppath;
         });
     </script>
 
