@@ -110,6 +110,12 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
         Route::get( '/edit/{order}', 'edit' )->name( 'edit' );
         Route::put( '/update/{order}', 'update' )->name( 'update' );
         Route::get( '/download/{order}', 'downloadOrder' )->name( 'download' );
+        Route::get( '/status/update/{order}', 'statusUpdate' )->name( 'status.update' );
+        Route::get( '/running-done/status/update/{order}', 'runningDone' )->name( 'status.running.done' );
+        Route::delete( '/delete/{order}', 'deleteOrder' )->name( 'delete' );
+        Route::get( '/restore/{id}', 'restore' )->name( 'restore' );
+        Route::get( '/accessories-inventory-report/{order}', 'downloadAccessoriesReport' )->name( 'accessories.report.download' );
+        Route::get( '/approved-layout-download/{order}', 'downloadApprovedLayout' )->name( 'approved.layout.download' );
     } );
 
 } );

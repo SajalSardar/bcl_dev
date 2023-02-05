@@ -22,7 +22,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <div class="btn-group nav nav-tabs mb-3">
+                        <div class="btn-group nav nav-tabs mb-3" id="orderTab">
                             <a class="btn btn-primary active" data-toggle="tab" href="#activeOrder">Active
                                 Order</a>
                             <a class="btn btn-primary" data-toggle="tab" href="#deactive">Deactive
@@ -55,20 +55,23 @@
                                             <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->user->email }}</td>
                                             <td>
-                                                <span
-                                                    class="badge {{ $order->status == 1 ? 'badge-success' : 'badge-warning' }}">{{ $order->status == 1 ? 'Running' : 'Order Done' }}</span>
+                                                <span class="badge badge-success">Running</span>
                                             </td>
                                             <td>
                                                 <a href="{{ route('dashboard.order.show', $order->id) }}"
                                                     class="btn btn-sm btn-info">View</a>
-                                                <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="#" method="POST" class="d-inline">
+                                                <a href="{{ route('dashboard.order.edit', $order->id) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('dashboard.order.delete', $order->id) }}"
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button"
+                                                    <button type="submit"
                                                         class="btn btn-sm btn-danger delete_btn">Trash</button>
 
                                                 </form>
+                                                <a href="{{ route('dashboard.order.status.update', $order->id) }}"
+                                                    class="btn btn-sm btn-warning">Deactive</a>
 
                                             </td>
                                         </tr>
@@ -101,21 +104,23 @@
                                             <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->user->email }}</td>
                                             <td>
-                                                <span
-                                                    class="badge {{ $order->status == 2 ? 'badge-info' : '' }}">{{ $order->status == 2 ? 'Deactive' : '' }}</span>
+                                                <span class="badge badge-warning">Deactive</span>
                                             </td>
                                             <td>
                                                 <a href="{{ route('dashboard.order.show', $order->id) }}"
                                                     class="btn btn-sm btn-info">View</a>
-                                                <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="#" method="POST" class="d-inline">
+                                                <a href="{{ route('dashboard.order.edit', $order->id) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('dashboard.order.delete', $order->id) }}"
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="button"
+                                                    <button type="submit"
                                                         class="btn btn-sm btn-danger delete_btn">Trash</button>
 
                                                 </form>
-
+                                                <a href="{{ route('dashboard.order.status.update', $order->id) }}"
+                                                    class="btn btn-sm btn-success">Active</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -147,20 +152,12 @@
                                             <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->user->email }}</td>
                                             <td>
-                                                <span
-                                                    class="badge {{ $order->status == 3 ? 'badge-success' : '' }}">{{ $order->status == 3 ? 'Done' : '' }}</span>
+                                                <span class="badge badge-success">Done</span>
                                             </td>
                                             <td>
                                                 <a href="{{ route('dashboard.order.show', $order->id) }}"
                                                     class="btn btn-sm btn-info">View</a>
-                                                <a href="#" class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="#" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-danger delete_btn">Trash</button>
 
-                                                </form>
 
                                             </td>
                                         </tr>
@@ -193,18 +190,11 @@
                                             <td>{{ $order->user->name }}</td>
                                             <td>{{ $order->user->email }}</td>
                                             <td>
-                                                <span class="badge badge-waning">Trash</span>
+                                                <span class="badge badge-warning">Deactive</span>
                                             </td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-info">Restore</a>
-                                                <form action="#" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-danger delete_btn">Trash</button>
-
-                                                </form>
-
+                                                <a href="{{ route('dashboard.order.restore', $order->id) }}"
+                                                    class="btn btn-sm btn-success">Restore</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -223,4 +213,16 @@
 
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+        //tab change
+        $('a[data-toggle="tab"]').on('show.bs.tab', function(e) {
+            localStorage.setItem('activeTab', $(e.target).attr('href'));
+        });
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('#orderTab a[href="' + activeTab + '"]').tab('show');
+        }
+    </script>
 @endsection
