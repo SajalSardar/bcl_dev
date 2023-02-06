@@ -160,7 +160,15 @@
                                         <span class="sidebar-menu-text">Dashboards</span>
                                     </a>
                                 </li>
-
+                                @if (Auth::user()->role === 'client')
+                                    <li
+                                        class="sidebar-menu-item {{ request()->routeIs('dashboard.order.client') ? 'active' : '' }}">
+                                        <a class="sidebar-menu-button" href="{{ route('dashboard.order.client') }}">
+                                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
+                                            <span class="sidebar-menu-text">Orders</span>
+                                        </a>
+                                    </li>
+                                @endif
                                 @if (Auth::user()->role === 'admin')
                                     <li
                                         class="sidebar-menu-item {{ request()->routeIs('dashboard.order.*') ? 'active open' : '' }}">

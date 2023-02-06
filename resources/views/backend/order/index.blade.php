@@ -21,7 +21,7 @@
             <div class="row mb-3">
                 <div class="col-6">
                     <div class="input-group mb-3">
-                        <input type="search" class="form-control" name="search" placeholder="Art# & PO#">
+                        <input type="search" class="form-control" name="art_po_no" placeholder="Art# & PO#">
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary" type="submit">Search</button>
                         </div>

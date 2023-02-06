@@ -14,7 +14,7 @@ class OrderController extends Controller {
 
     public function index( Request $request ) {
 
-        $searchString = $request->search;
+        $searchString = $request->art_po_no;
 
         if ( $searchString != null ) {
 
@@ -30,8 +30,36 @@ class OrderController extends Controller {
             $orders            = Order::selectquery( 1 )->paginate( 30 );
             $compleated_orders = Order::selectquery( 3 )->paginate( 30 );
             $deactive_orders   = Order::selectquery( 2 )->paginate( 30 );
-            $trash_orders      = Order::onlyTrashed()->with( 'user' )->select( 'art_po', 'quantity', 'user_id', 'id', 'status' )->orderBy( 'id', 'desc' )->paginate( 1 );
+            $trash_orders      = Order::onlyTrashed()
+                ->with( 'user' )->select( 'art_po', 'quantity', 'user_id', 'id', 'status' )
+                ->orderBy( 'id', 'desc' )->paginate( 30 );
             return view( 'backend.order.index', compact( 'orders', 'compleated_orders', 'deactive_orders', 'trash_orders' ) );
+        }
+
+    }
+
+    public function clientOrder( Request $request ) {
+
+        $searchString = $request->art_po_no;
+
+        if ( $searchString != null ) {
+
+            $orders = Order::with( 'user' )
+                ->where( 'user_id', auth()->user()->id )
+                ->where( 'art_po', 'LIKE', "%{$searchString}%" )
+                ->select( 'art_po', 'quantity', 'user_id', 'id', 'status', 'deleted_at' )
+                ->withTrashed()
+                ->orderBy( 'id', 'desc' )
+                ->paginate( 30 )->withQueryString();
+
+            return view( 'backend.order.userorder', compact( 'orders' ) );
+        } else {
+            $orders = Order::with( 'user' )
+                ->where( 'user_id', auth()->user()->id )
+                ->select( 'art_po', 'quantity', 'user_id', 'id', 'status', 'deleted_at' )
+                ->withTrashed()
+                ->orderBy( 'status', 'asc' )->paginate( 30 );
+            return view( 'backend.order.userorder', compact( 'orders' ) );
         }
 
     }

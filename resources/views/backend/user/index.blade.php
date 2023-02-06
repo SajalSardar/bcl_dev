@@ -17,7 +17,19 @@
     </div>
 
     <div class="container-fluid page__container">
-
+        <form action="{{ route('dashboard.user.index') }}" method="GET">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control" value="{{ request()->get('search_string') }}"
+                            name="search_string" placeholder="Name Or Email">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

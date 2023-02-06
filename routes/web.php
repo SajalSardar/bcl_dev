@@ -36,7 +36,19 @@ Route::controller( FrontendController::class )->name( 'frontend.' )->group( func
     Route::get( '/barison/profile', 'profile' )->name( 'profile' );
     Route::get( '/profile/download', 'downloadProfile' )->name( 'profile.download' );
 } );
-Route::get( '/dashboard', [BackendController::class, 'index'] )->name( 'dashboard.index' )->middleware( ['auth', 'verified'] );
+
+Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified'] )->group( function () {
+    Route::get( '/', [BackendController::class, 'index'] )->name( 'index' );
+
+    Route::controller( OrderController::class )->prefix( 'order' )->name( 'order.' )->group( function () {
+        Route::get( '/myorders', 'clientOrder' )->name( 'client' );
+        Route::get( '/show/{order}', 'show' )->name( 'show' );
+        Route::get( '/download/{order}', 'downloadOrder' )->name( 'download' );
+        Route::get( '/accessories-inventory-report/{order}', 'downloadAccessoriesReport' )->name( 'accessories.report.download' );
+        Route::get( '/approved-layout-download/{order}', 'downloadApprovedLayout' )->name( 'approved.layout.download' );
+    } );
+} );
+
 Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified', 'admin'] )->group( function () {
 
     Route::resource( '/slider', SliderController::class )->except( ['create', 'show'] );
@@ -106,16 +118,13 @@ Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verifi
         Route::get( '/', 'index' )->name( 'index' );
         Route::get( '/crete', 'create' )->name( 'create' );
         Route::post( '/crete', 'store' )->name( 'store' );
-        Route::get( '/show/{order}', 'show' )->name( 'show' );
         Route::get( '/edit/{order}', 'edit' )->name( 'edit' );
         Route::put( '/update/{order}', 'update' )->name( 'update' );
-        Route::get( '/download/{order}', 'downloadOrder' )->name( 'download' );
         Route::get( '/status/update/{order}', 'statusUpdate' )->name( 'status.update' );
         Route::get( '/running-done/status/update/{order}', 'runningDone' )->name( 'status.running.done' );
         Route::delete( '/delete/{order}', 'deleteOrder' )->name( 'delete' );
         Route::get( '/restore/{id}', 'restore' )->name( 'restore' );
-        Route::get( '/accessories-inventory-report/{order}', 'downloadAccessoriesReport' )->name( 'accessories.report.download' );
-        Route::get( '/approved-layout-download/{order}', 'downloadApprovedLayout' )->name( 'approved.layout.download' );
+
     } );
 
 } );

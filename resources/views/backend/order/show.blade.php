@@ -17,7 +17,7 @@
     </div>
 
     <div class="container-fluid page__container">
-        
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -33,12 +33,14 @@
                             </div>
 
                             <div>
-                                @if ($order->status == 1 || $order->status == 2)
-                                    <a href="{{ route('dashboard.order.status.running.done', $order->id) }}"
-                                        class="btn btn-success">Make Done</a>
-                                @elseif($order->status == 3)
-                                    <a href="{{ route('dashboard.order.status.running.done', $order->id) }}"
-                                        class="btn btn-success">Make Running</a>
+                                @if (Auth::user()->role === 'admin')
+                                    @if ($order->status == 1 || $order->status == 2)
+                                        <a href="{{ route('dashboard.order.status.running.done', $order->id) }}"
+                                            class="btn btn-success">Make Done</a>
+                                    @elseif($order->status == 3)
+                                        <a href="{{ route('dashboard.order.status.running.done', $order->id) }}"
+                                            class="btn btn-success">Make Running</a>
+                                    @endif
                                 @endif
 
                                 <a href="{{ route('dashboard.order.download', $order->id) }}"
