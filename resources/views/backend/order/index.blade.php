@@ -17,6 +17,18 @@
     </div>
 
     <div class="container-fluid page__container">
+        <form action="{{ route('dashboard.order.index') }}" method="GET">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <div class="input-group mb-3">
+                        <input type="search" class="form-control" name="search" placeholder="Art# & PO#">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
 
         <div class="row">
             <div class="col-md-12">

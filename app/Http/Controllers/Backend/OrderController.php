@@ -12,12 +12,28 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller {
 
-    public function index() {
-        $orders            = Order::selectquery( 1 )->paginate( 30 );
-        $compleated_orders = Order::selectquery( 3 )->paginate( 30 );
-        $deactive_orders   = Order::selectquery( 2 )->paginate( 30 );
-        $trash_orders      = Order::onlyTrashed()->with( 'user' )->select( 'art_po', 'quantity', 'user_id', 'id', 'status' )->orderBy( 'id', 'desc' )->paginate( 1 );
-        return view( 'backend.order.index', compact( 'orders', 'compleated_orders', 'deactive_orders', 'trash_orders' ) );
+    public function index( Request $request ) {
+
+        $searchString = $request->search;
+
+        if ( $searchString != null ) {
+
+            $orders = Order::with( 'user' )
+                ->where( 'art_po', 'LIKE', "%{$searchString}%" )
+                ->select( 'art_po', 'quantity', 'user_id', 'id', 'status', 'deleted_at' )
+                ->withTrashed()
+                ->orderBy( 'id', 'desc' )
+                ->paginate( 30 )->withQueryString();
+
+            return view( 'backend.order.search', compact( 'orders' ) );
+        } else {
+            $orders            = Order::selectquery( 1 )->paginate( 30 );
+            $compleated_orders = Order::selectquery( 3 )->paginate( 30 );
+            $deactive_orders   = Order::selectquery( 2 )->paginate( 30 );
+            $trash_orders      = Order::onlyTrashed()->with( 'user' )->select( 'art_po', 'quantity', 'user_id', 'id', 'status' )->orderBy( 'id', 'desc' )->paginate( 1 );
+            return view( 'backend.order.index', compact( 'orders', 'compleated_orders', 'deactive_orders', 'trash_orders' ) );
+        }
+
     }
 
     public function create() {
