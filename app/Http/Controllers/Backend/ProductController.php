@@ -34,7 +34,7 @@ class ProductController extends Controller {
         $file = $request->file( 'image' );
 
         $request->validate( [
-            "title"       => 'required|unique:products,title',
+            "title"       => 'required',
             "description" => 'nullable',
             "category_id" => 'required',
             "image"       => 'required|max:512|mimes:png,jpg,webp',
@@ -86,7 +86,7 @@ class ProductController extends Controller {
         $file = $request->file( 'image' );
 
         $request->validate( [
-            "title"       => 'required|unique:products,title,' . $product->id,
+            "title"       => 'required',
             "description" => 'nullable',
             "category_id" => 'required',
             "image"       => 'nullable|max:512|mimes:png,jpg,webp',
