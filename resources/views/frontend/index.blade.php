@@ -240,7 +240,7 @@
                         <div class="mission">
                             <div class="vission_text">
                                 <h3>{{ $employee->title }}</h3>
-                                <p>{!! $employee->description !!}</p>
+                                {!! $employee->description !!}
                             </div>
                         </div>
 
