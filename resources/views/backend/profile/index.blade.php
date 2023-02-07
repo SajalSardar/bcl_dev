@@ -83,7 +83,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3> About Page Banner</h3>
+                        <h3> Profile Page Banner</h3>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('dashboard.profile.page.header.update', $page_header->id) }}" method="POST"

@@ -422,7 +422,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="" class="form-label">Lab test Aprvd:</label>
+                                <label for="" class="form-label">Lab test Approved:</label>
                                 <input type="text" placeholder="Lab test Aprvd" name="lab_test_aprvd"
                                     class="form-control mb-2 @error('lab_test_aprvd') is-invalid @enderror"
                                     value="{{ old('lab_test_aprvd') }}">

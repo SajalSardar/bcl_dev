@@ -61,7 +61,7 @@ class ProfileController extends Controller {
             $profile_name = $profile->profile;
         }
 
-        $success = Profile::create( [
+        $success = $profile->update( [
             "title"       => $request->title,
             "profile"     => $profile_name,
             "description" => $request->description,
