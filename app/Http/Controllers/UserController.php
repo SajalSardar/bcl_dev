@@ -40,6 +40,7 @@ class UserController extends Controller {
             'email'             => $request->email,
             'password'          => Hash::make( $request->password ),
             'email_verified_at' => Carbon::now(),
+            'role'              => $request->role,
         ] );
 
         if ( $user ) {
