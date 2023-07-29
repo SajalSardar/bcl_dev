@@ -30,8 +30,7 @@
                 <div class="col-md-12">
                     <div class="about_page">
                         <h3>{{ $about->title }}</h3>
-                        <img src="{{ asset('storage/uploads/' . $about->image) }}" width="400"
-                            alt=">{{ $about->title }}">
+                        <img src="{{ asset('storage/uploads/' . $about->image) }}" width="400" alt="{{ $about->title }}">
                         {!! $about->description !!}
                     </div>
 

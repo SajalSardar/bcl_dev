@@ -33,7 +33,8 @@
                             <a href="{{ route('frontend.profile.download') }}" class="custom_btn">Download
                                 Profile</a>
                         </h3>
-                        <img src="{{ asset('storage/uploads/' . $profile->image) }}" width="400" alt="">
+                        <img src="{{ asset('storage/uploads/' . $profile->image) }}" width="400"
+                            alt="{{ $profile->title }}">
                         {!! $profile->description !!}
                     </div>
 

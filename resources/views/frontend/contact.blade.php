@@ -83,7 +83,7 @@
         @if ($masterSectionSettings['gMap'] === 1)
             <section class="map mt-2">
                 <div class="container-fluid p-0">
-                    <iframe src="{{ $contact->map }}" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    <iframe src="{{ $contact->map }}" frameborder="0" class="border-0" allowfullscreen=""></iframe>
                 </div>
             </section>
         @endif

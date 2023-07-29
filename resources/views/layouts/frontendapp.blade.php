@@ -5,6 +5,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="description"
+        content="BARISONS CREATIONS LTD. is headquartered in Dhaka, Bangladesh, in the center of the Bangladesh textile industry, which is one of the most important textile-manufacturing locations in the Asia.">
+    <meta name="keywords"
+        content="barisons, aided,advancement,asia, bangladesh,woven,business,clients,company,quality,creations,products,manufacturers,export,textile,garments,garments accessories,garments export,sustainability">
+    <meta name="author" content="BARISONS CREATIONS LTD.">
+
+    <meta property="og:title" content="Barisons Creations Ltd.">
+    <meta property="og:description"
+        content="BARISONS CREATIONS LTD. is headquartered in Dhaka, Bangladesh, in the center of the Bangladesh textile industry, which is one of the most important textile-manufacturing locations in the Asia.">
+    <meta property="og:image" content="http://barisons-bd.com/storage/uploads/4cb52094-fad2-4afe-9e8a-3195d872fc3d.jpg">
+    <meta property="og:url" content="http://barisons-bd.com/">
+
+    {{-- <meta name="twitter:title" content="Add title here">
+    <meta name="twitter:description" content="Add description here">
+    <meta name="twitter:url" content="https://your-website.com/twitter-image.png">
+    <meta name="twitter:card" content="summary"> --}}
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage/uploads/' . $themeOption->logo) }}" />
     <title>@yield('title') - {{ config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,7 +93,8 @@
         <nav class="navbar navbar-expand-lg wow fadeInUp" id="main_navigation">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('frontend.index') }}">
-                    <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" alt="" width="150">
+                    <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" alt="{{ config('app.name') }}"
+                        width="150">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_menu">
                     <i class="fas fa-bars"></i>
@@ -156,7 +174,7 @@
                     <div class="col-lg-3 col-md-3">
                         <div class="footer_logo">
                             <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" width="100"
-                                alt="">
+                                alt="{{ config('app.name') }}">
                         </div>
                     </div>
                     <div class="col-lg-5 col-md-5">

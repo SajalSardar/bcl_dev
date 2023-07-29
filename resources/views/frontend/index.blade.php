@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="about_title">
-                            <h2>{!! $home_about->title !!} </h2>
+                            <h1>{!! $home_about->title !!} </h1>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -128,7 +128,8 @@
                 <div class="row align-items-center mission_vission_row">
                     <div class="col-lg-6 d-none d-lg-block">
                         <div class="vission_left_img">
-                            <img src="{{ asset('storage/mission/' . $homeMission->image) }}" alt="">
+                            <img src="{{ asset('storage/mission/' . $homeMission->image) }}"
+                                alt="{{ $homeMission->block_one_title . $homeMission->block_two_title . $homeMission->block_three_title }}">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -233,7 +234,7 @@
                 <div class="row align-items-center mission_vission_row">
                     <div class="col-lg-6 d-none d-lg-block">
                         <div class="vission_left_img">
-                            <img src="{{ asset('storage/employee/' . $employee->image) }}" alt="">
+                            <img src="{{ asset('storage/employee/' . $employee->image) }}" alt="{{ $employee->title }}">
                         </div>
                     </div>
                     <div class="col-lg-6">
