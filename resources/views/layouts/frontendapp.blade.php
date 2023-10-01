@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description"
-        content="BARISONS CREATIONS LTD. is headquartered in Dhaka, Bangladesh, in the center of the Bangladesh textile industry, which is one of the most important textile-manufacturing locations in the Asia.">
+        content="Barisons Creations LTD. is a leading clothing manufacturer in Bangladesh, headquartered in Dhaka, the center of the Bangladesh textile industry. We have been dedicated to clothing manufacturing since 2002, and we strive to follow the sector's evolution as closely as possible. Our manufacturing units have achieved a level of efficiency that places us among the most successful competitors in the sector on a national level.">
     <meta name="keywords"
         content="barisons, aided,advancement,asia, bangladesh,woven,business,clients,company,quality,creations,products,manufacturers,export,textile,garments,garments accessories,garments export,sustainability">
     <meta name="author" content="BARISONS CREATIONS LTD.">
 
-    <meta property="og:title" content="Barisons Creations Ltd.">
+    <meta property="og:title" content="Barisons Creations LTD. - Leading Clothing Manufacturer in Bangladesh
+    ">
     <meta property="og:description"
         content="BARISONS CREATIONS LTD. is headquartered in Dhaka, Bangladesh, in the center of the Bangladesh textile industry, which is one of the most important textile-manufacturing locations in the Asia.">
     <meta property="og:image" content="http://barisons-bd.com/storage/uploads/4cb52094-fad2-4afe-9e8a-3195d872fc3d.jpg">
     <meta property="og:url" content="http://barisons-bd.com/">
 
-    {{-- <meta name="twitter:title" content="Add title here">
-    <meta name="twitter:description" content="Add description here">
-    <meta name="twitter:url" content="https://your-website.com/twitter-image.png">
-    <meta name="twitter:card" content="summary"> --}}
+    <meta name="twitter:title" content="Barisons Creations LTD. - Leading Clothing Manufacturer in Bangladesh">
+    <meta name="twitter:description"
+        content="Barisons Creations LTD. is a leading clothing manufacturer in Bangladesh, headquartered in Dhaka, the center of the Bangladesh textile industry. We have been dedicated to clothing manufacturing since 2002, and we strive to follow the sector's evolution as closely as possible. Our manufacturing units have achieved a level of efficiency that places us among the most successful competitors in the sector on a national level.">
     <link rel="icon" type="image/x-icon" href="{{ asset('storage/uploads/' . $themeOption->logo) }}" />
     <title>@yield('title') - {{ config('app.name') }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
