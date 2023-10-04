@@ -87,14 +87,13 @@
             </div>
         </header>
     @endif
-
+    footer_logo
     <!-- menu part  -->
     @if ($masterSectionSettings['mainMenu'] === 1)
         <nav class="navbar navbar-expand-lg wow fadeInUp" id="main_navigation">
             <div class="container">
                 <a class="navbar-brand" href="{{ route('frontend.index') }}">
-                    <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" alt="{{ config('app.name') }}"
-                        width="150">
+                    <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" alt="{{ config('app.name') }}">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main_menu">
                     <i class="fas fa-bars"></i>
@@ -173,7 +172,7 @@
                 <div class="row bottom_footer align-items-center">
                     <div class="col-lg-3 col-md-3">
                         <div class="footer_logo">
-                            <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}" width="100"
+                            <img src="{{ asset('storage/uploads/' . $themeOption->logo) }}"
                                 alt="{{ config('app.name') }}">
                         </div>
                     </div>

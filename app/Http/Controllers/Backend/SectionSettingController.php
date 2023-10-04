@@ -8,40 +8,39 @@ use App\Models\ThemeOption;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
 
 class SectionSettingController extends Controller {
 
     public function sectionSettings() {
         $sections = SectionSetting::all();
-        return view( 'backend.setting.sectionsetting', compact( 'sections' ) );
+        return view('backend.setting.sectionsetting', compact('sections'));
     }
 
-    public function sectionSettingsUpdate( Request $request ) {
+    public function sectionSettingsUpdate(Request $request) {
         $sections = SectionSetting::all();
-        foreach ( $sections as $sections ) {
-            if ( !in_array( $sections->id, $request->section ) ) {
-                $sections->update( [
+        foreach ($sections as $sections) {
+            if (!in_array($sections->id, $request->section)) {
+                $sections->update([
                     'status' => 2,
-                ] );
+                ]);
             } else {
-                $sections->update( [
+                $sections->update([
                     'status' => 1,
-                ] );
+                ]);
             }
         }
-        return back()->with( 'success', 'Update Successfull!' );
+        return back()->with('success', 'Update Successfull!');
     }
 
     public function themeOptionEdit() {
-        return view( 'backend.setting.option' );
+        return view('backend.setting.option');
     }
 
-    public function themeOptionUpdate( Request $request ) {
+    public function themeOptionUpdate(Request $request) {
         $themeOption = ThemeOption::firstOrFail();
-        $file        = $request->file( 'logo' );
+        $file        = $request->file('logo');
 
-        $request->validate( [
+        $request->validate([
             "header_number"                      => 'required',
             "logo"                               => 'nullable|max:512|mimes:png,jpg,webp',
             "company_section_title"              => 'required',
@@ -59,22 +58,23 @@ class SectionSettingController extends Controller {
             "footer_four_title"                  => 'required',
             "footer_four"                        => 'required',
             "bottom_footer"                      => 'required',
-        ] );
+        ]);
 
-        if ( $file ) {
+        if ($file) {
 
-            if ( file_exists( public_path( 'storage/uploads/' . $themeOption->logo ) ) ) {
-                Storage::delete( 'uploads/' . $themeOption->logo );
+            if (file_exists(public_path('storage/uploads/' . $themeOption->logo))) {
+                Storage::delete('uploads/' . $themeOption->logo);
             }
 
             $logo_name = Str::uuid() . '.' . $file->extension();
-            Image::make( $file )->crop( 300, 110 )->save( public_path( 'storage/uploads/' . $logo_name ) );
+            // Image::make($file)->crop(78, 80)->save(public_path('storage/uploads/' . $logo_name));
+            Storage::putFileAs('uploads/', $file, $logo_name);
         } else {
             $logo_name = $themeOption->logo;
 
         }
 
-        $update = $themeOption->update( [
+        $update = $themeOption->update([
             "header_number"                      => $request->header_number,
             "logo"                               => $logo_name,
             "company_section_title"              => $request->company_section_title,
@@ -92,12 +92,12 @@ class SectionSettingController extends Controller {
             "footer_four_title"                  => $request->footer_four_title,
             "footer_four"                        => $request->footer_four,
             "bottom_footer"                      => $request->bottom_footer,
-        ] );
+        ]);
 
-        if ( $update ) {
-            return back()->with( 'success', 'Update Successfully Done!' );
+        if ($update) {
+            return back()->with('success', 'Update Successfully Done!');
         } else {
-            return back()->with( 'success', 'Update Fail!' );
+            return back()->with('success', 'Update Fail!');
         }
     }
 }
