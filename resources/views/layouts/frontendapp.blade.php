@@ -87,7 +87,6 @@
             </div>
         </header>
     @endif
-    footer_logo
     <!-- menu part  -->
     @if ($masterSectionSettings['mainMenu'] === 1)
         <nav class="navbar navbar-expand-lg wow fadeInUp" id="main_navigation">
