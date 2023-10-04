@@ -41,13 +41,12 @@
                                 <label for="" class="form-label">Logo: </label>
                                 <input type="file" id="file_input" name="logo"
                                     class="form-control mb-2 @error('logo') is-invalid @enderror">
-                                <p style="color: rgba(54, 76, 102, 0.7)">Select Image size 300x110 !</p>
                                 @error('logo')
                                     <p class="text-danger">{{ $message }} </p>
                                 @enderror
                                 <div class="mt-2">
                                     <img id="show_img" src="{{ asset('storage/uploads/' . $themeOption->logo) }}"
-                                        width="150" alt="">
+                                        alt="">
                                 </div>
                             </div>
 
