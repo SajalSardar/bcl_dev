@@ -782,13 +782,13 @@ p {
 
 /*  breadcrumbs css */
 #breadcrumbs {
-    padding: 230px 0 125px 0;
+    padding: 150px 0 125px 0;
     position: relative;
     z-index: 1;
     background-position: center !important;
     background-size: cover !important;
 }
-
+/* 
 #breadcrumbs:after {
     content: '';
     position: absolute;
@@ -798,10 +798,11 @@ p {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
-}
+} */
 
 .breadcrumb_inner h2 {
     color: #fff;
+    text-shadow: 0 0 2px #000;
 }
 
 .breadcrumb li.active {
