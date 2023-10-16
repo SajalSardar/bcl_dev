@@ -195,11 +195,14 @@ p {
 }
 
 /* menu part css  */
-#main_navigation {
+/* #main_navigation {
     position: absolute;
     width: 100%;
     top: 40px;
     z-index: 99;
+} */
+#main_navigation {
+    width: 100%;
 }
 
 #main_menu ul li {
@@ -210,7 +213,7 @@ p {
 #main_menu ul li a {
     position: relative;
     font-size: 16px;
-    color: #fff;
+    color: #000;
     font-weight: 400;
     padding: 0;
     letter-spacing: 1px;
@@ -294,7 +297,7 @@ p {
     overflow: hidden;
 }
 
-.banner_items:after {
+/* .banner_items:after {
     content: '';
     position: absolute;
     left: 0;
@@ -302,7 +305,7 @@ p {
     bottom: 0;
     right: 0;
     background-color: rgba(0, 0, 0, .6);
-}
+} */
 
 .banner_items video {
     width: 100%;
