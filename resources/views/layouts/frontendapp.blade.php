@@ -120,6 +120,10 @@
                                 href="{{ route('frontend.gallery') }}">Gallery</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link {{ Route::is('frontend.compliance') ? 'active' : '' }}"
+                                href="{{ route('frontend.compliance') }}">Compliance</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ Route::is('frontend.contact') ? 'active' : '' }}"
                                 href="{{ route('frontend.contact') }}">Contact us</a>
                         </li>

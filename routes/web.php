@@ -24,118 +24,119 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::controller( FrontendController::class )->name( 'frontend.' )->group( function () {
-    Route::get( '/', 'index' )->name( 'index' );
-    Route::get( '/about', 'about' )->name( 'about' );
-    Route::get( '/about/{slug}', 'aboutBlockSingle' )->name( 'about.block.single' );
-    Route::get( '/product', 'product' )->name( 'product' );
-    Route::get( '/sustainability', 'sustainability' )->name( 'sustainability' );
-    Route::get( '/gallery', 'gallery' )->name( 'gallery' );
-    Route::get( '/contact', 'contact' )->name( 'contact' );
-    Route::post( '/contact', 'contactStore' )->name( 'contact.store' );
-    Route::get( '/barison/profile', 'profile' )->name( 'profile' );
-    Route::get( '/profile/download', 'downloadProfile' )->name( 'profile.download' );
-} );
+Route::controller(FrontendController::class)->name('frontend.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/about', 'about')->name('about');
+    Route::get('/about/{slug}', 'aboutBlockSingle')->name('about.block.single');
+    Route::get('/product', 'product')->name('product');
+    Route::get('/sustainability', 'sustainability')->name('sustainability');
+    Route::get('/gallery', 'gallery')->name('gallery');
+    Route::get('/contact', 'contact')->name('contact');
+    Route::post('/contact', 'contactStore')->name('contact.store');
+    Route::get('/barison/profile', 'profile')->name('profile');
+    Route::get('/profile/download', 'downloadProfile')->name('profile.download');
+    Route::get('/compliance', 'compliance')->name('compliance');
+});
 
-Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified'] )->group( function () {
-    Route::get( '/', [BackendController::class, 'index'] )->name( 'index' );
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [BackendController::class, 'index'])->name('index');
 
-    Route::controller( OrderController::class )->prefix( 'order' )->name( 'order.' )->group( function () {
-        Route::get( '/myorders', 'clientOrder' )->name( 'client' );
-        Route::get( '/show/{order}', 'show' )->name( 'show' );
-        Route::get( '/download/{order}', 'downloadOrder' )->name( 'download' );
-        Route::get( '/accessories-inventory-report/{order}', 'downloadAccessoriesReport' )->name( 'accessories.report.download' );
-        Route::get( '/approved-layout-download/{order}', 'downloadApprovedLayout' )->name( 'approved.layout.download' );
-    } );
-} );
+    Route::controller(OrderController::class)->prefix('order')->name('order.')->group(function () {
+        Route::get('/myorders', 'clientOrder')->name('client');
+        Route::get('/show/{order}', 'show')->name('show');
+        Route::get('/download/{order}', 'downloadOrder')->name('download');
+        Route::get('/accessories-inventory-report/{order}', 'downloadAccessoriesReport')->name('accessories.report.download');
+        Route::get('/approved-layout-download/{order}', 'downloadApprovedLayout')->name('approved.layout.download');
+    });
+});
 
-Route::prefix( 'dashboard' )->name( 'dashboard.' )->middleware( ['auth', 'verified', 'admin'] )->group( function () {
+Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'verified', 'admin'])->group(function () {
 
-    Route::resource( '/slider', SliderController::class )->except( ['create', 'show'] );
-    Route::get( '/slider/status/update/{slider}', [SliderController::class, 'sliderStatusUpdate'] )->name( 'slider.status.update' );
+    Route::resource('/slider', SliderController::class)->except(['create', 'show']);
+    Route::get('/slider/status/update/{slider}', [SliderController::class, 'sliderStatusUpdate'])->name('slider.status.update');
 
-    Route::resource( '/mission-vission', MissionVissionController::class )->except( ['create', 'show'] );
-    Route::get( '/mission-vission/status/update/{missionVission}', [MissionVissionController::class, 'mvStatusUpdate'] )->name( 'mission.vission.status' );
+    Route::resource('/mission-vission', MissionVissionController::class)->except(['create', 'show']);
+    Route::get('/mission-vission/status/update/{missionVission}', [MissionVissionController::class, 'mvStatusUpdate'])->name('mission.vission.status');
 
-    Route::resource( '/counter', CounterController::class );
-    Route::get( '/counter/status/update/{counter}', [CounterController::class, 'counterStatusUpdate'] )->name( 'counter.status' );
+    Route::resource('/counter', CounterController::class);
+    Route::get('/counter/status/update/{counter}', [CounterController::class, 'counterStatusUpdate'])->name('counter.status');
 
-    Route::resource( '/company', CompanyController::class )->except( ['create', 'show'] );
-    Route::get( '/company/status/update/{company}', [CompanyController::class, 'companyStatusUpdate'] )->name( 'company.status' );
+    Route::resource('/company', CompanyController::class)->except(['create', 'show']);
+    Route::get('/company/status/update/{company}', [CompanyController::class, 'companyStatusUpdate'])->name('company.status');
 
-    Route::resource( '/about', AboutController::class )->only( ['index', 'update'] );
-    Route::put( '/about/header/{id}', [AboutController::class, 'aboutPageHeader'] )->name( 'about.page.header.update' );
+    Route::resource('/about', AboutController::class)->only(['index', 'update']);
+    Route::put('/about/header/{id}', [AboutController::class, 'aboutPageHeader'])->name('about.page.header.update');
 
-    Route::resource( '/product-category', ProductCategoryController::class )->except( ['create', 'show'] );
-    Route::resource( '/product', ProductController::class );
-    Route::get( '/product/status/update/{product}', [ProductController::class, 'productStatusUpdate'] )->name( 'product.status.update' );
-    Route::put( '/product/header/{id}', [ProductController::class, 'productPageHeader'] )->name( 'product.page.header.update' );
+    Route::resource('/product-category', ProductCategoryController::class)->except(['create', 'show']);
+    Route::resource('/product', ProductController::class);
+    Route::get('/product/status/update/{product}', [ProductController::class, 'productStatusUpdate'])->name('product.status.update');
+    Route::put('/product/header/{id}', [ProductController::class, 'productPageHeader'])->name('product.page.header.update');
 
-    Route::resource( '/sustainability', SustainabilityController::class )->except( ['create', 'show'] );
-    Route::get( '/sustainability/status/update/{sustainability}', [SustainabilityController::class, 'sustainabilityStatusUpdate'] )->name( 'sustainability.status' );
-    Route::put( '/sustainability/header/{id}', [SustainabilityController::class, 'sustainabilityPageHeader'] )->name( 'sustainability.page.header.update' );
+    Route::resource('/sustainability', SustainabilityController::class)->except(['create', 'show']);
+    Route::get('/sustainability/status/update/{sustainability}', [SustainabilityController::class, 'sustainabilityStatusUpdate'])->name('sustainability.status');
+    Route::put('/sustainability/header/{id}', [SustainabilityController::class, 'sustainabilityPageHeader'])->name('sustainability.page.header.update');
 
-    Route::resource( '/gallery', GalleryController::class )->except( ['create', 'show'] );
-    Route::get( '/gallery/status/update/{gallery}', [GalleryController::class, 'galleryStatusUpdate'] )->name( 'gallery.status.update' );
-    Route::put( '/gallery/header/{id}', [GalleryController::class, 'galleryPageHeader'] )->name( 'gallery.page.header.update' );
+    Route::resource('/gallery', GalleryController::class)->except(['create', 'show']);
+    Route::get('/gallery/status/update/{gallery}', [GalleryController::class, 'galleryStatusUpdate'])->name('gallery.status.update');
+    Route::put('/gallery/header/{id}', [GalleryController::class, 'galleryPageHeader'])->name('gallery.page.header.update');
 
-    Route::resource( '/contact', ContactController::class )->only( ['index', 'update'] );
-    Route::controller( ContactController::class )->prefix( 'contact' )->name( 'contact.' )->group( function () {
+    Route::resource('/contact', ContactController::class)->only(['index', 'update']);
+    Route::controller(ContactController::class)->prefix('contact')->name('contact.')->group(function () {
 
-        Route::put( '/header/{id}', 'contactPageHeader' )->name( 'page.header.update' );
-        Route::get( '/message', 'contactMessage' )->name( 'message' );
-        Route::delete( '/message/{id}', 'contactMessageDelete' )->name( 'message.destroy' );
-        Route::get( '/message/{id}', 'contactMessageShow' )->name( 'message.show' );
-    } );
+        Route::put('/header/{id}', 'contactPageHeader')->name('page.header.update');
+        Route::get('/message', 'contactMessage')->name('message');
+        Route::delete('/message/{id}', 'contactMessageDelete')->name('message.destroy');
+        Route::get('/message/{id}', 'contactMessageShow')->name('message.show');
+    });
 
-    Route::resource( '/profile', BackendProfileController::class )->only( ['index', 'update'] );
-    Route::put( '/profile/header/{id}', [BackendProfileController::class, 'profilePageHeader'] )->name( 'profile.page.header.update' );
+    Route::resource('/profile', BackendProfileController::class)->only(['index', 'update']);
+    Route::put('/profile/header/{id}', [BackendProfileController::class, 'profilePageHeader'])->name('profile.page.header.update');
 
-    Route::resource( '/value', ValuesController::class )->except( ['create', 'show'] );
-    Route::get( '/value/status/update/{value}', [ValuesController::class, 'valueStatusUpdate'] )->name( 'value.status.update' );
+    Route::resource('/value', ValuesController::class)->except(['create', 'show']);
+    Route::get('/value/status/update/{value}', [ValuesController::class, 'valueStatusUpdate'])->name('value.status.update');
 
-    Route::resource( '/home-about', HomeAboutController::class )->only( ['index', 'update'] );
-    Route::resource( '/home-mission', HomeMissionController::class )->only( ['index', 'update'] );
-    Route::resource( '/employee', EmployeeController::class )->only( ['index', 'update'] );
+    Route::resource('/home-about', HomeAboutController::class)->only(['index', 'update']);
+    Route::resource('/home-mission', HomeMissionController::class)->only(['index', 'update']);
+    Route::resource('/employee', EmployeeController::class)->only(['index', 'update']);
 
-    Route::resource( '/social-link', SocialLinkController::class );
-    Route::get( '/social-link/status/{socialLink}', [SocialLinkController::class, 'socialLinkStatusUpdate'] )->name( 'social.status.update' );
+    Route::resource('/social-link', SocialLinkController::class);
+    Route::get('/social-link/status/{socialLink}', [SocialLinkController::class, 'socialLinkStatusUpdate'])->name('social.status.update');
 
-    Route::controller( SectionSettingController::class )->name( 'setting.' )->group( function () {
-        Route::get( '/section-settings', 'sectionSettings' )->name( 'section' );
-        Route::post( '/section-settings', 'sectionSettingsUpdate' )->name( 'section.update' );
-        Route::get( '/theme-option', 'themeOptionEdit' )->name( 'theme.option.edit' );
-        Route::post( '/theme-option', 'themeOptionUpdate' )->name( 'theme.option.Update' );
-    } );
+    Route::controller(SectionSettingController::class)->name('setting.')->group(function () {
+        Route::get('/section-settings', 'sectionSettings')->name('section');
+        Route::post('/section-settings', 'sectionSettingsUpdate')->name('section.update');
+        Route::get('/theme-option', 'themeOptionEdit')->name('theme.option.edit');
+        Route::post('/theme-option', 'themeOptionUpdate')->name('theme.option.Update');
+    });
 
-    Route::controller( UserController::class )->name( 'user.' )->group( function () {
-        Route::get( '/users', 'index' )->name( 'index' );
-        Route::get( '/user/create', 'create' )->name( 'create' );
-        Route::post( '/user/create', 'store' )->name( 'store' );
-    } );
+    Route::controller(UserController::class)->name('user.')->group(function () {
+        Route::get('/users', 'index')->name('index');
+        Route::get('/user/create', 'create')->name('create');
+        Route::post('/user/create', 'store')->name('store');
+    });
 
-    Route::controller( OrderController::class )->prefix( 'order' )->name( 'order.' )->group( function () {
-        Route::get( '/', 'index' )->name( 'index' );
-        Route::get( '/crete', 'create' )->name( 'create' );
-        Route::post( '/crete', 'store' )->name( 'store' );
-        Route::get( '/edit/{order}', 'edit' )->name( 'edit' );
-        Route::put( '/update/{order}', 'update' )->name( 'update' );
-        Route::get( '/status/update/{order}', 'statusUpdate' )->name( 'status.update' );
-        Route::get( '/running-done/status/update/{order}', 'runningDone' )->name( 'status.running.done' );
-        Route::delete( '/delete/{order}', 'deleteOrder' )->name( 'delete' );
-        Route::get( '/restore/{id}', 'restore' )->name( 'restore' );
+    Route::controller(OrderController::class)->prefix('order')->name('order.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/crete', 'create')->name('create');
+        Route::post('/crete', 'store')->name('store');
+        Route::get('/edit/{order}', 'edit')->name('edit');
+        Route::put('/update/{order}', 'update')->name('update');
+        Route::get('/status/update/{order}', 'statusUpdate')->name('status.update');
+        Route::get('/running-done/status/update/{order}', 'runningDone')->name('status.running.done');
+        Route::delete('/delete/{order}', 'deleteOrder')->name('delete');
+        Route::get('/restore/{id}', 'restore')->name('restore');
 
-    } );
+    });
 
-} );
+});
 
-Route::middleware( 'auth' )->group( function () {
-    Route::controller( ProfileController::class )->prefix( 'profile' )->name( 'profile.' )->group( function () {
-        Route::get( '/', 'edit' )->name( 'edit' );
-        Route::patch( '/', 'update' )->name( 'update' );
-        Route::delete( '/', 'destroy' )->name( 'destroy' );
-    } );
+Route::middleware('auth')->group(function () {
+    Route::controller(ProfileController::class)->prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', 'edit')->name('edit');
+        Route::patch('/', 'update')->name('update');
+        Route::delete('/', 'destroy')->name('destroy');
+    });
 
-} );
+});
 
 require __DIR__ . '/auth.php';
