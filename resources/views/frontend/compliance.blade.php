@@ -39,6 +39,9 @@
                 <div class="row mt-5">
                     <div class="col-lg-12 text-center my-5 py-5">
                         <h5>We are proudly Sedex approved.</h5>
+                        <a href="{{ asset('frontend/images/sedex _certification.pdf') }}" target="_blank"
+                            class="btn btn-danger mt-3">See Certificate</a>
+
                     </div>
 
                 </div>
